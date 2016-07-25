@@ -1,0 +1,8 @@
+-r requirements.txt
+flake8==2.5.0
+pytest==2.9.2
+mock==2.0.0
+pre-commit==0.7.6
+pytest-cov==2.2.0
+sphinx==1.4.1
+sphinxcontrib-programoutput==0.8

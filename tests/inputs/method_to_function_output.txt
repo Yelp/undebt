@@ -1,0 +1,24 @@
+from function_lives_here import function
+something before code pattern
+@decorator([Class])
+def some_function(self, abc, xyz):
+    """herp the derp while also derping and herping"""
+    cde = fgh(self.l)
+    ijk = cde.herp(
+        opq_foo=function(FOO(abc))
+    )['str']
+    lmn = cde.herp(
+        opq_foo=function(FOO(xyz))
+    )['str']
+bla bla bla
+    for str_data in derp_data['data']['strs']:
+        if str_data['str'] == Type.HERP:
+            disable(herp_foo=herp_foo, derp_foo=derp_foo)
+            rst.uvw(
+                CTA_BUSINESS_PLATFORM_DISABLED_LOG,
+                "derp {derp_foo} herp {herp_foo}".format(
+                    derp_foo=function(FOO(derp_foo)),
+                    herp_foo=function(FOO(herp_foo)),
+                ),
+            )
+something after code pattern

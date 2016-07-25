@@ -1,0 +1,105 @@
+Undebt_: Examples
+=================
+
+.. _Undebt: index.html
+.. default-role:: code
+
+The `undebt.examples` package contains various example pattern files. These example patterns can either simply be used as they are to make use of the transformation they describe, or used as templates to `build your own pattern files`_.
+
+.. _`build your own pattern files`: patterns.html
+
+`undebt.examples.nl_at_eof`
+---------------------------
+
+A toy example to add a new line (`"\n"`) to the end of files that lack one.
+
+Example of:
+
+- use of the `tokens_as_list` decorator to define a `replace` function with assert checks
+- negative lookahead using the `~` operator
+- match any character with `ANY_CHAR`
+- match the end of a file with `END_OF_FILE`
+
+`undebt.examples.dbl_quote_docstring`
+-------------------------------------
+
+Changes all `'''` strings that can be changed to `"""` strings.
+
+Example of:
+
+- return `None` from `replace` to do nothing
+- match a `'''` string using `TRIPLE_SGL_QUOTE_STRING`
+
+`undebt.examples.class_inherit_object`
+--------------------------------------
+
+Changes classes that inherit from nothing to inherit from `object`, which makes sure they behave as Python 3 new-style classes instead of Python 2 old-style classes.
+
+Example of:
+
+- `Optional` to optionally match something
+- `.suppress` method to prevent an object from appearing in the parsed tokens
+- `Keyword` to match an individual word
+- `INDENT` to match the beginning of a line and any leading whitespace
+- `NAME` to match any variable name
+
+`undebt.examples.hex_to_bitshift`
+---------------------------------
+
+Replaces hex flags with bitshift flags.
+
+Example of:
+
+- `Literal` to match a specific literal
+- `Combine` to match a series of tokens without any whitespace in-between
+- `Word` to match a word made up of a set of characters
+
+`undebt.examples.exec_function`
+-------------------------------
+
+Changes instances of the Python 2 style `exec code in globals, locals` exec statement to the universal Python style `exec(code, globals, locals)` (which will work on Python 2.7 and Python 3).
+
+Example of:
+
+- using `tokens_as_list` to assert multiple possible token list lengths
+- `ATOM` to match a Python atom
+
+`undebt.examples.attribute_to_function`
+---------------------------------------
+
+Transforms uses of `.attribute` into calls to `function`, and adds `from function_lives_here import function` whenever an instance of `function` is added.
+
+Example of:
+
+- use of `extra` to add an import statement
+- multiple possible patterns using the `|` operator
+- `ZeroOrMore` to match any number of a pattern
+- `PARENS, BRACKETS` to match anything inside matching parentheses and brackets
+- `ATOM_BASE` to match a trailerless Python atom
+
+`undebt.examples.method_to_function`
+------------------------------------
+
+Slightly more complicated version of `attribute_to_function` that finds a method call instead of an attribute access, and makes sure that method call is not on `self`.
+
+`undebt.examples.sqla_count`
+----------------------------
+
+Transforms inefficient SQL alchemy `.count()` queries into more efficient `.scalar()` queries that don't create a sub query.
+
+Example of:
+
+- use of the `tokens_as_dict` decorator to define a `replace` function with assert checks
+- grammar element function calling to label tokens in the resulting `tokens_as_dict` dictionary
+- using `leading_whitespace` and `trailing_whitespace` to extract whitespace in a `replace` function
+
+`undebt.examples.contextlib_nested`
+-----------------------------------
+
+Transforms uses of `contextlib.nested` into multiple clauses in a `with` statement. Respects usage with `as` and without `as`.
+
+Example of:
+
+- using `tokens_as_dict` to assert multiple possible dictionary keys
+- `EXPR` to match a Python expression
+- `COMMA_IND, LPAREN_IND, IND_RPAREN` to match optional indentation at particular points
