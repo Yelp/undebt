@@ -5,8 +5,7 @@
 \#*\#
 .cache
 
-# Develoopment Environment
-virtualenv_run
+# Development Environment
 venv
 
 # Packages
@@ -25,15 +24,14 @@ lib
 lib64
 *.iml
 *.log
-/.venv.touch
-/virtualenv_run
+.venv.touch
 
 # Installer logs
 pip-log.txt
 
 # Unit test / coverage reports
 .coverage
-/coverage-html
+coverage-html
 .tox
 nosetests.xml
 

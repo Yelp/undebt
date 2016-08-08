@@ -151,7 +151,7 @@ Matches a valid Python unary operator.
 Matches an `ATOM` potentially preceded by unary operator(s).
 
 **HEADER**
-Matches imports, comments, and strings at the start of a file. Used to determine where to insert the old/basic style `extra`.
+Matches imports, comments, and strings at the start of a file. Used to determine where to insert the basic style `extra`.
 
 `undebt.pattern.interface`
 --------------------------
@@ -162,11 +162,11 @@ Returns a `(grammar, replace)` tuple describing a pattern to insert `extra` afte
 
 **get_patterns(*pattern_modules)**
 
-Returns a list containing a new/advanced style `patterns` list for each pattern module in `pattern_modules`. The resulting list can be passed to `undebt.cmd.logic.process`.
+Returns a list containing a advanced style `patterns` list for each pattern module in `pattern_modules`. The resulting list can be passed to `undebt.cmd.logic.process`.
 
 `undebt.cmd.logic`
 ------------------
 
 **process(patterns, text)**
 
-Where `patterns` is a list of new/advanced style `patterns` lists, applies the specified patterns to the given text and returns the transformed version. Usually used in conjunction with `undebt.pattern.interface.get_patterns`.
+Where `patterns` is a list of advanced style `patterns` lists, applies the specified patterns to the given text and returns the transformed version. Usually used in conjunction with `undebt.pattern.interface.get_patterns`.

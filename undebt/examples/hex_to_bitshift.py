@@ -4,13 +4,13 @@ from __future__ import division
 from __future__ import print_function
 
 from pyparsing import Combine
+from pyparsing import hexnums
 from pyparsing import Literal
-from pyparsing import nums
 from pyparsing import Word
 
 from undebt.pattern.util import tokens_as_list
 
-grammar = Combine(Literal("0x").suppress() + Word(nums))
+grammar = Combine(Literal("0x").suppress() + Word(hexnums))
 
 
 @tokens_as_list(assert_len=1)

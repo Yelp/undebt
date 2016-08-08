@@ -11,7 +11,7 @@ Install it
 
     $ git clone https://github.com/Yelp/undebt.git
     $ cd undebt
-    $ pip install -e .
+    $ pip install .
 
 Read it
 -------

@@ -23,6 +23,10 @@ with open(method_to_function_output_path, "r") as f:
     method_to_function_output_contents = f.read()
 
 
+def test_input_output_different():
+    assert method_to_function_input_contents != method_to_function_output_contents
+
+
 def _read_input_file():
     with open(method_to_function_input_path, "r+") as f:
         try:
@@ -55,3 +59,8 @@ def test_directory():
     with mock.patch("sys.argv", args):
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
+
+
+def test_left_unchanged():
+    assert _read_input_file() == method_to_function_input_contents
+    assert _read_output_file() == method_to_function_output_contents

@@ -11,8 +11,8 @@ from undebt.pattern.interface import get_patterns
 def test_contextlib_nested():
     patterns = get_patterns(contextlib_nested)
     text = """
-import contextlib
 import mock
+import contextlib
 from contextlib import nested
 
 
@@ -25,7 +25,7 @@ with contextlib.nested(
     pass
 
 
-with contextlib.nested(
+with nested(
         mock.patch(
             'os.path.join'
         ),
@@ -51,41 +51,35 @@ with contextlib.nested(a, b, c) as (x, y, z):
     pass
 """
     assert process(patterns, text) == ("""
-import contextlib
 import mock
+import contextlib
 from contextlib import nested
 
 
-with (
-    mock.patch(
-            'os.path.join'),
-    mock.patch('os.mkdir'),
-    mock.patch('os.chdir'),
-):
+with mock.patch(
+            'os.path.join'), \\
+    mock.patch('os.mkdir'), \\
+    mock.patch('os.chdir'):
     pass
 
 
-with (
-    mock.patch(
+with mock.patch(
             'os.path.join'
-        ),
-    mock.patch('os.mkdir'),
-    mock.patch('os.chdir'),
-):
+        ), \\
+    mock.patch('os.mkdir'), \\
+    mock.patch('os.chdir'):
     pass
 
 
 def a_function():
-    with (
-        mock.patch(
+    with mock.patch(
                 'lots of stuff',
                 'in this mock',
                 return_value=None
-            ),
+            ), \\
         mock.patch(
                 'reformatting really stinks'
-            ),
-    ):
+            ):
         return None
 
 with a as x, \\

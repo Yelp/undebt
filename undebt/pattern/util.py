@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import functools
 
+from pyparsing import _trim_arity
 from pyparsing import Combine
 from pyparsing import originalTextFor
 from pyparsing import replaceWith
@@ -59,14 +60,14 @@ def tokens_as_list(assert_len=None, assert_len_in=None):
     """Creates a decorator that passes tokens as a list."""
     def decorator(old_replace):
         @functools.wraps(old_replace)
-        def new_replace(tokens):
+        def new_replace(s, l, tokens):
             tokenlist = tokens.asList()
             if assert_len is not None:
                 assert len(tokenlist) == assert_len, \
                     "len(" + repr(tokenlist) + ") != " + repr(assert_len)
             if assert_len_in is not None:
                 assert len(tokenlist) in assert_len_in, "len(" + repr(tokenlist) + ") not in " + repr(assert_len_in)
-            return old_replace(tokenlist)
+            return _trim_arity(old_replace)(s, l, tokenlist)
         return new_replace
     return decorator
 
@@ -75,7 +76,7 @@ def tokens_as_dict(assert_keys=None, assert_keys_in=None):
     """Creates a decorator that passes tokens as a dict."""
     def decorator(old_replace):
         @functools.wraps(old_replace)
-        def new_replace(tokens):
+        def new_replace(s, l, tokens):
             tokendict = tokens.asDict()
             if assert_keys is not None:
                 assert set(tokendict.keys()) == set(assert_keys), \
@@ -83,6 +84,6 @@ def tokens_as_dict(assert_keys=None, assert_keys_in=None):
             if assert_keys_in is not None:
                 assert set(tokendict.keys()) <= set(assert_keys_in), \
                     repr(set(tokendict.keys())) + " > " + repr(set(assert_keys_in))
-            return old_replace(tokendict)
+            return _trim_arity(old_replace)(s, l, tokendict)
         return new_replace
     return decorator

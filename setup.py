@@ -14,6 +14,7 @@ setup(
     version=__version__,
     description="No More Code Debt",
     license="Copyright Yelp, Inc. 2016",
+    url="https://github.com/Yelp/undebt",
     packages=find_packages(exclude=[
         "tests*",
         "docs*",
@@ -38,4 +39,12 @@ setup(
             'undebt = undebt.__main__:main',
         ],
     },
+    classifiers=[
+        "License :: OSI Approved :: Apache Software License",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development",
+        "Topic :: Utilities",
+        "Environment :: Console",
+        "Operating System :: OS Independent",
+    ]
 )

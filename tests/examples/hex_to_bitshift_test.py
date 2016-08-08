@@ -12,7 +12,7 @@ from undebt.pattern.interface import get_patterns
 def test_simple():
     assert_transform(
         hex_to_bitshift,
-        'FLAGA=0x00000001',
+        'FLAGA = 0x00000001',
         ['1 << 0'],
     )
 
@@ -57,7 +57,7 @@ def test_actual_code():
 def test_ignore_hex_not_power_of_two():
     assert_transform(
         hex_to_bitshift,
-        'SOME_FLAG=0x123',
+        'SOME_FLAG = 0x123',
         [None],
     )
 
@@ -65,7 +65,15 @@ def test_ignore_hex_not_power_of_two():
 def test_avoid_negative_shift_count():
     assert_transform(
         hex_to_bitshift,
-        'SOME_FLAG=0x0',
+        'SOME_FLAG = 0x0',
+        [None],
+    )
+
+
+def test_parse_hexnums():
+    assert_transform(
+        hex_to_bitshift,
+        'SOME_FLAG = 0xa',
         [None],
     )
 

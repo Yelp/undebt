@@ -16,19 +16,19 @@ While the `official pyparsing documentation`_ is a great resource, most of the m
 Operators
 ---------
 
-**+: And**
+**+ (And)**
 
 Adding two grammar elements produces a new grammar element that matches the first one, then the second one, with optional intervening whitespace.
 
-**|: Or**
+**| (Or)**
 
 Oring two grammar elements produces a new grammar element that attempts to match the first one, then if that fails, attempts to match the second one.
 
-**~: Negative Lookahead**
+**~ (Negative Lookahead)**
 
 Inverting a grammar element produces a new grammar element that produces no tokens and matches only if the inverted grammar doesn't match. Using a negative lookahead also doesn't advance the current parsing position.
 
-**^: Match Longest**
+**^ (Match Longest)**
 
 Similar to `|`, but matches the longest of the grammar elements that match, instead of the first grammar element that matches.
 

@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import os.path
 
+from undebt.pattern.interface import create_find_and_replace
 from undebt.pattern.interface import parse_grammar
 
 
@@ -24,6 +25,9 @@ def raw_assert_parse(grammar, text, expected):
 
 
 def assert_transform(pattern, text, expected):
-    results = parse_grammar(pattern.grammar, text)
+    assert not hasattr(pattern, "patterns"), "assert_transform only works with old/basic style patterns"
+    find_and_replace = create_find_and_replace(pattern.grammar, pattern.replace)
+    results = parse_grammar(find_and_replace, text)
     assert len(results) == len(expected)
-    assert expected == [pattern.replace(tokens) for tokens, _, _ in results]
+    assert all(len(tokens) == 1 for tokens, _, _ in results)
+    assert expected == [tokens.asList()[0] for tokens, _, _ in results]

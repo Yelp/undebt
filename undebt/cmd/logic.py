@@ -4,6 +4,7 @@ from __future__ import division
 from __future__ import print_function
 
 from undebt.cmd.logger import log
+from undebt.pattern.interface import create_find_and_replace
 from undebt.pattern.interface import parse_grammar
 
 
@@ -19,12 +20,13 @@ def process(patterns, text):
         found = []
         for grammar, replace in inner_patterns:
 
-            results = parse_grammar(grammar, text)
+            find_and_replace = create_find_and_replace(grammar, replace)
+            results = parse_grammar(find_and_replace, text)
             if not results:
                 break
             else:
                 found.append(len(results))
-                text = _transform_results(replace, results, text)
+                text = _transform_results(results, text)
 
         if found:
             log.info('=> pattern {} found {} time(s) in {} pass(es)'
@@ -36,24 +38,21 @@ def process(patterns, text):
     return text
 
 
-def _transform_results(replace, results, text):
-    found_tokens = [tokens for tokens, _, _ in results]
-    intervals = [(start, end) for _, start, end in results]
-    new_strings = [replace(tokens) for tokens in found_tokens]
+def _transform_results(results, text):
+    new_strings = []
+    intervals = []
 
-    _no_replace_to_none(new_strings, intervals)
+    for replace_result, start, end in results:
+
+        replace_list = replace_result.asList()
+        assert len(replace_list) == 1
+        replace_item = replace_list[0]
+
+        if replace_item is not None:
+            new_strings.append(replace_item)
+            intervals.append((start, end))
+
     return _replace_with(text, new_strings, intervals)
-
-
-def _no_replace_to_none(new_strings, intervals):
-    assert len(new_strings) == len(intervals)
-    i = 0
-    while i < len(new_strings):
-        if new_strings[i] is None:
-            new_strings.pop(i)
-            intervals.pop(i)
-        else:
-            i += 1
 
 
 def _replace_with(old_text, new_strings, intervals):

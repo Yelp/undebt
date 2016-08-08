@@ -29,7 +29,7 @@ expr_list = (
 )
 grammar = (
     INDENT("leading indent") + Keyword("with")
-    + Keyword("contextlib") + DOT + Keyword("nested") + expr_list("nested calls")
+    + Optional(Keyword("contextlib") + DOT) + Keyword("nested") + expr_list("nested calls")
     + Optional(Keyword("as").suppress() + expr_list("as assignments")) + COLON
 )
 
@@ -57,9 +57,8 @@ def replace(tokens):
         )
     else:
         return (
-            leading_indent + "with (\n"
-            + "".join(
-                lw + "    " + nc.strip() + ",\n"
-                for nc in nested_calls
-            ) + lw + "):"
+            leading_indent + "with "
+            + (", \\\n" + lw + "    ").join(
+                nc.strip() for nc in nested_calls
+            ) + ":"
         )

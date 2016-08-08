@@ -7,7 +7,10 @@ import imp
 import os
 import sys
 
+from pyparsing import _trim_arity
+
 from undebt.cmd.logger import log
+from undebt.pattern.util import attach
 from undebt.pattern.util import tokens_as_list
 
 
@@ -63,7 +66,7 @@ def get_pattern_for_extra(extra):
         if extra not in tokens[0]:
             return tokens[0] + extra + "\n"
         else:
-            return tokens[0]
+            return None
 
     return HEADER, extra_replace
 
@@ -77,3 +80,8 @@ def load_module(path):
     """Loads a module from its path."""
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
+
+
+def create_find_and_replace(grammar, replace):
+    """Creates a find-and-replace grammar."""
+    return attach(grammar, lambda s, l, t: [_trim_arity(replace)(s, l, t)])

@@ -103,7 +103,7 @@ def _find_files(paths, extensions):
                         yield os.path.join(root, f)
 
                 for d in dirs[:]:
-                    if os.path.split(d)[-1].startswith("."):  # ignore .*
+                    if d != "." * len(d) and d.startswith("."):  # ignore .*
                         dirs.remove(d)
 
 

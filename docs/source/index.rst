@@ -3,7 +3,7 @@ Undebt
 
 .. default-role:: code
 
-This is the documentation for Undebt. For more information, check out our GitHub_.
+This is the documentation for Undebt_. See below for a list of all of the articles hosted here.
 
 .. toctree::
    :maxdepth: 3
@@ -14,4 +14,4 @@ This is the documentation for Undebt. For more information, check out our GitHub
    util
    pyparsing
 
-.. _GitHub: https://github.com/Yelp/undebt
+.. _Undebt: https://github.com/Yelp/undebt
