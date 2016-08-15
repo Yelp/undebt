@@ -31,9 +31,8 @@ Read it
       --pattern path, -p path
                             paths to pattern definition files
       --extension ext, -e ext
-                            extensions of files to be modified when using
-                            searching a directory (exclude ".", e.g. "py" instead
-                            of ".py")
+                            extensions of files to be modified when searching a
+                            directory (exclude ".", e.g. "py" instead of ".py")
       --multiprocess processes, -m processes
                             number of processes to run in parallel (default is 16)
       --verbose

@@ -7,9 +7,9 @@ Undebt_: Pattern Files
 Undebt requires a pattern file that describes what to replace and how to replace it. There are two different ways to write pattern files: basic style, and advanced style. Unless you know you need multi-pass parsing, you should use basic style by default.
 
 Basic Style
----------------
+-----------
 
-When writing an basic style pattern, you must define the following names in your pattern file:
+If you don't know what style you should be using, you should be using basic style. When writing a basic style pattern, you must define the following names in your pattern file:
 
 - `grammar` defines what pattern you want to replace, and must be a pyparsing_ grammar object.
 - `replace` is a function of one argument, the tokens produced by `grammar`, that returns the string they should be replaced with, or `None` to do nothing (this is the single-argument form—multi-argument is also allowed as documented `below`_).
@@ -24,9 +24,9 @@ That sounds complicated, but it's actually very simple. To start learning more, 
 .. _`pattern utilities`: util.html
 
 Advanced Style
-------------------
+--------------
 
-When writing an advanced style pattern, you need only define one name:
+Unlike basic style, advanced style allows you to use custom multi-pass parsing—if that's not something you need, you should use basic style. When writing an advanced style pattern, you need only define one name:
 
 - `patterns` is a list of `(grammar, replace)` tuples, where each tuple in the list is only run if the previous one succeeded
 
@@ -58,4 +58,4 @@ Or equivalently but more succinctly::
 Multi-Argument Replace
 ----------------------
 
-In both styles, when writing a `replace` function, it is sometimes useful to have access to the location in and/or text of the original file. If your `replace` function takes two arguments, it will be passed `location, tokens`, and for three arguments, it will get `text, location, tokens`. This will work even if you are using one of the `tokens_as_list` or `tokens_as_dict` decorator.
+In both styles, when writing a `replace` function, it is sometimes useful to have access to the parsing location in the file and/or the text of the original file. If your `replace` function takes two arguments, it will be passed `location, tokens`, and for three arguments, it will get `text, location, tokens`. This will work even if you are using one of the `tokens_as_list` or `tokens_as_dict` decorators.

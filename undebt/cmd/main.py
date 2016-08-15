@@ -70,7 +70,7 @@ def _handle_arguments():
         '-e',
         metavar='ext',
         action='append',
-        help='extensions of files to be modified when using searching a directory'
+        help='extensions of files to be modified when searching a directory'
         ' (exclude ".", e.g. "py" instead of ".py")')
     parser.add_argument(
         '--multiprocess', '-m', metavar='processes', type=int, default=16,

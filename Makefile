@@ -3,14 +3,14 @@
 all: dev pre-commit
 
 dev: venv
-	venv/bin/pip install -r requirements-dev.txt --upgrade
+	venv/bin/pip install -r requirements-dev.txt
 	@echo ""
 	@echo "========================================"
 	@echo "Don't forget to source venv/bin/activate"
 
 venv:
 	test -s venv || { virtualenv -p python2.7 venv; }
-	venv/bin/pip install -r requirements.txt --upgrade
+	venv/bin/pip install -r requirements.txt
 
 clean:
 	find . -name '*.pyc' -delete
@@ -19,6 +19,8 @@ clean:
 	rm -rf .tox
 	rm -rf *.egg-info
 	rm -rf venv
+	rm -rf build
+	rm -rf dist
 
 pre-commit:
 	@tox -e pre-commit -- install -f --install-hooks
@@ -30,3 +32,6 @@ test: pre-commit
 
 docs:
 	tox -e docs
+
+build:
+	python setup.py sdist bdist_wheel

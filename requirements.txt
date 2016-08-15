@@ -1,2 +1,2 @@
 argparse==1.4.0
-pyparsing==2.1.7
+pyparsing==2.1.8

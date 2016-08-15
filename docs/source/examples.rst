@@ -145,5 +145,5 @@ In files where `from __future__ import unicode_literals` appears, removes unnece
 Example of:
 
 - an advanced style pattern file making use of multi-pass parsing
-- `originalTextFor` to get make a grammar parse to the original text that matched it
+- `originalTextFor` to make grammar elements parse to the original text that matched them
 - `STRING` to match any valid string

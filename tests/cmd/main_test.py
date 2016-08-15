@@ -7,10 +7,11 @@ import os.path
 
 import mock
 
-from tests import tests_inputs_directory
 from undebt.cmd.main import main
 from undebt.examples import method_to_function
 
+
+tests_inputs_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "inputs")
 
 method_to_function_path = os.path.splitext(method_to_function.__file__)[0] + ".py"
 

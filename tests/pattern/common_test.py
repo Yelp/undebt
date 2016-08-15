@@ -3,13 +3,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tests import assert_parse
 from undebt.pattern.common import DOTTED_NAME
 from undebt.pattern.common import INDENT
 from undebt.pattern.common import NL_WHITE
 from undebt.pattern.common import PARENS
 from undebt.pattern.common import STRING
 from undebt.pattern.common import WHITE
+from undebt.pattern.testing import assert_parse
 
 
 def test_INDENT():

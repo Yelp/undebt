@@ -33,6 +33,11 @@ def condense(item):
     return attach(item, "".join)
 
 
+def debug(item):
+    """Modifies a grammar element to print whatever it matches."""
+    return attach(item, lambda tokens: print(tokens))
+
+
 def quoted(string):
     """Match a string containing the given string."""
     return originalTextFor(Combine("'" + string + "'") | Combine('"' + string + '"'))

@@ -3,11 +3,12 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from tests import assert_parse
 from undebt.pattern.python import ATOM
+from undebt.pattern.python import BINARY_OP
 from undebt.pattern.python import EXPR
 from undebt.pattern.python import HEADER
 from undebt.pattern.python import OP
+from undebt.pattern.testing import assert_parse
 
 
 def test_OP():
@@ -30,6 +31,15 @@ def test_OP():
             (28, 29),
             (32, 34),
         ],
+    )
+
+
+def test_BINARY_OP():
+    assert_parse(
+        grammar=BINARY_OP,
+        text="==",
+        tokens_list=[["=="]],
+        interval_list=[(0, 2)],
     )
 
 

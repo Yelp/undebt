@@ -30,7 +30,7 @@ from undebt.pattern.util import addspace
 from undebt.pattern.util import condense
 
 
-ASSIGN_OP = Combine(Optional(Word("~%^&*-+|/")) + Literal("="))
+ASSIGN_OP = Combine((Word("~%^&*-+|/") | ~Literal("==")) + Literal("="))
 
 
 UNARY_OP = addspace(OneOrMore(

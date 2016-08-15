@@ -41,9 +41,13 @@ Returns the whitespace at the end of `text`.
 
 Modifies a grammar element to always parse to the same fixed `output`.
 
+**debug(item)**
+
+Modifies a grammar element to print the tokens that it matches.
+
 **attach(item, action)**
 
-Modifies a grammar element to parse to the result of calling `action` on the  tokens produced by that grammar element. Used to implement `condense`, `addspace`, and `fixto`.
+Modifies a grammar element to parse to the result of calling `action` on the  tokens produced by that grammar element.
 
 `undebt.pattern.common`
 -----------------------
@@ -90,11 +94,11 @@ Grammar elements that match different types of multi-line strings.
 **COMMA_IND, LPAREN_IND, IND_RPAREN**
 Same as `COMMA`, `LPAREN`, and `RPAREN`, but allow for an `INDENT` after (for `COMMA_IND` and `LPAREN_IND`) or before (for `IND_RPAREN`).
 
-**NO_BS_NL**
-Matches a new line not preceded by a backslash.
-
 **LINE_START**
 Matches the start of a line, either after a new line, or at the start of the file.
+
+**NO_BS_NL**
+Matches a new line not preceded by a backslash.
 
 **START_OF_FILE**
 Grammar element that only matches at the very beginning of the file.
