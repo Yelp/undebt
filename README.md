@@ -8,7 +8,7 @@ To learn about what Undebt is and why we created it, check out our [post on the 
 
 To get started using Undebt, install with
 ```bash
-python -m pip install undebt
+pip install undebt
 ```
 then head over to our **[documentation](http://undebt.readthedocs.io/en/latest/)** for more information.
 
@@ -31,7 +31,7 @@ To run this pattern on your code:
 
 **(1)** Install Undebt by entering into your command line
 ```bash
-python -m pip install undebt
+pip install undebt
 ```
 **(2)** Create a new file `my_class_inherit_object.py` containing
 ```python
