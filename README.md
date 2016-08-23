@@ -14,7 +14,7 @@ then head over to our **[documentation](http://undebt.readthedocs.io/en/latest/)
 
 ## Example
 
-While the [full list of examples](http://undebt.readthedocs.io/en/latest/examples.html) can be found in the [documentation](http://undebt.readthedocs.io/en/latest/), to show you how it's done we'll go in-depth into one example in particular, [`class_inherit_object.py`](https://github.com/Yelp/undebt/blob/master/undebt/examples/class_inherit_object.py). Like most of the examples, this pattern is built for Python, but in theory Undebt could be used with any language. The idea of this pattern is to convert any usage of [old-style classes to new-style classes](https://docs.python.org/2/reference/datamodel.html#newstyle) by making all classes that don't inherit from anything else inherit from `object`. The code for this pattern is incredibly simple—a mere four lines not counting imports:
+While the [full list of examples](http://undebt.readthedocs.io/en/latest/examples.html) can be found in the documentation, to show you how it's done we'll go in-depth into one example in particular, [`class_inherit_object.py`](https://github.com/Yelp/undebt/blob/master/undebt/examples/class_inherit_object.py). Like most of the examples, this pattern is built for Python, but in theory Undebt could be used with any language. The idea of this pattern is to convert any usage of [old-style classes to new-style classes](https://docs.python.org/2/reference/datamodel.html#newstyle) by making all classes that don't inherit from anything else inherit from `object`. The code for this pattern is incredibly simple—a mere four lines not counting imports:
 ```python
 grammar = INDENT + Keyword("class").suppress() + NAME + (Optional(LPAREN + RPAREN) + COLON).suppress()
 
