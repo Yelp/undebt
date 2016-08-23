@@ -1,6 +1,6 @@
 # Undebt
 
-Undebt is a fast, straightforward, reliable tool for performing massive, automated code refactoring, used at [@Yelp](https://github.com/Yelp). Undebt lets you define complex find-and-replace rules using standard, straightforward Python that can be applied quickly to an entire code base with a simple command.
+Undebt is a fast, straightforward, reliable tool for performing massive, automated refactoring of Python code, used at [@Yelp](https://github.com/Yelp). Undebt lets you define complex find-and-replace rules using standard, straightforward Python that can be applied quickly to an entire code base with a simple command.
 
 To learn about what Undebt is and why we created it, check out our [post on the Yelp Engineering Blog](http://engineeringblog.yelp.com/2016/08/undebt-how-we-refactored-3-million-lines-of-code.html).
 
