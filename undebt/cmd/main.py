@@ -118,7 +118,8 @@ def _process_file(patterns, text_file):
         log.exception(traceback.format_exc())
         return False
     else:
-        _write_result_text(result_text, text_file)
+        if result_text != text:
+            _write_result_text(result_text, text_file)
         return True
 
 
