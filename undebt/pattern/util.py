@@ -84,7 +84,7 @@ def tokens_as_dict(assert_keys=None, assert_keys_in=None):
         def new_replace(s, l, tokens):
             tokendict = tokens.asDict()
             if assert_keys is not None:
-                assert set(tokendict.keys()) == set(assert_keys), \
+                assert set(tokendict.keys()) >= set(assert_keys), \
                     repr(set(tokendict.keys())) + " != " + repr(set(assert_keys))
             if assert_keys_in is not None:
                 assert set(tokendict.keys()) <= set(assert_keys_in), \

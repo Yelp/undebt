@@ -11,11 +11,11 @@ Undebt's `undebt.pattern` package exposes various modules full of functions and 
 
 **tokens_as_list(assert_len=None, assert_len_in=None)**
 
-Decorator used to wrap `replace` functions that converts the parsed tokens into a list.
+Decorator used to wrap `replace` functions that converts the parsed tokens into a list. `assert_len` checks that the tokens have exactly the given length, while `assert_len_in` checks that the length of the tokens is in the provided list.
 
 **tokens_as_dict(assert_keys=None, assert_keys_in=None)**
 
-Decorator used to wrap `replace` functions that converts the parsed tokens into a dictionary, with keys assigned by calling grammar elements with the desired key as the argument.
+Decorator used to wrap `replace` functions that converts the parsed tokens into a dictionary, with keys assigned by calling grammar elements with the desired key as the argument. `assert_keys` checks that the keys in the token dictionary are a subset of the given keys, while `assert_keys_in` checks that the given keys are a subset of the keys in the token dictionary.
 
 **condense(item)**
 
