@@ -61,6 +61,17 @@ def trailing_whitespace(text):
     return trailing
 
 
+def in_string(location, code):
+    """Determines if the given location is in a string inside of code."""
+    str_char = None
+    for c in code[:location]:
+        if c == str_char:
+            str_char = None
+        elif c in "\"'":
+            str_char = c
+    return str_char is not None
+
+
 def tokens_as_list(assert_len=None, assert_len_in=None):
     """Creates a decorator that passes tokens as a list."""
     def decorator(old_replace):

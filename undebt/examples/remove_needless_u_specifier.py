@@ -13,6 +13,7 @@ from undebt.pattern.common import COMMA
 from undebt.pattern.common import NAME
 from undebt.pattern.common import STRING
 from undebt.pattern.util import condense
+from undebt.pattern.util import in_string
 from undebt.pattern.util import tokens_as_list
 
 
@@ -27,17 +28,25 @@ import_grammar = originalTextFor(
 )
 
 
+@tokens_as_list(assert_len=1)
+def identity_replace(tokens):
+    return tokens[0]
+
+
 u_string_grammar = Literal("u").suppress() + condense(Optional(Literal("r")) + STRING)
 
 
 @tokens_as_list(assert_len=1)
-def identity_replace(tokens):
-    return tokens[0]
+def u_string_replace(original, location, tokens):
+    if in_string(location, original):
+        return None
+    else:
+        return tokens[0]
 
 
 patterns = [
     # first, check to see if from __future__ import unicode_literals exists
     (import_grammar, identity_replace),
     # if it does, then find u strings and return them with the u suppressed
-    (u_string_grammar, identity_replace),
+    (u_string_grammar, u_string_replace),
 ]
