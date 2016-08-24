@@ -32,9 +32,6 @@ setup(
             "coverage",
         ],
     },
-    scripts=[
-        "undebt/__main__.py",
-    ],
     entry_points={
         'console_scripts': [
             'undebt = undebt.__main__:main',
