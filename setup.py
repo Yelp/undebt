@@ -22,7 +22,6 @@ setup(
     ]),
     install_requires=[
         'pyparsing',
-        'argparse',
     ],
     extras_require={
         "testing": [
