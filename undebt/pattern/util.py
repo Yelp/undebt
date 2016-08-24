@@ -6,7 +6,9 @@ from __future__ import print_function
 import functools
 
 from pyparsing import _trim_arity
+from pyparsing import col
 from pyparsing import Combine
+from pyparsing import line
 from pyparsing import originalTextFor
 from pyparsing import replaceWith
 
@@ -62,9 +64,11 @@ def trailing_whitespace(text):
 
 
 def in_string(location, code):
-    """Determines if the given location is in a string inside of code."""
+    """Determines if the given location is in a string inside of code.
+
+    Does not detect triple-quoted multi-line strings."""
     str_char = None
-    for c in code[:location]:
+    for c in line(location, code)[:col(location, code) - 1]:
         if c == str_char:
             str_char = None
         elif c in "\"'":

@@ -39,7 +39,7 @@ Returns the whitespace at the end of `text`.
 
 **in_string(location, code)**
 
-Determines if, at the given location in the code, there is an enclosing string.
+Determines if, at the given location in the code, there is an enclosing non-multiline string.
 
 **fixto(item, output)**
 
