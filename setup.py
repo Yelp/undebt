@@ -12,8 +12,8 @@ from undebt import __version__
 setup(
     name="undebt",
     version=__version__,
-    description="No More Code Debt",
-    long_description="Check out undebt on `GitHub <https://github.com/Yelp/undebt>`_!",
+    description="A fast, straightforward, reliable tool for performing massive, automated code refactoring",
+    long_description="Check out Undebt on `GitHub <https://github.com/Yelp/undebt>`_!",
     license="Copyright Yelp, Inc. 2016",
     url="https://github.com/Yelp/undebt",
     packages=find_packages(exclude=[
