@@ -22,7 +22,6 @@ setup(
     ]),
     install_requires=[
         'pyparsing',
-        'argparse',
     ],
     extras_require={
         "testing": [
@@ -32,9 +31,6 @@ setup(
             "coverage",
         ],
     },
-    scripts=[
-        "undebt/__main__.py",
-    ],
     entry_points={
         'console_scripts': [
             'undebt = undebt.__main__:main',
