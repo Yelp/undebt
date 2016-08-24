@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Yelp/undebt.svg?branch=master)](https://travis-ci.org/Yelp/undebt)
+[![Coverage Status](https://coveralls.io/repos/github/Yelp/undebt/badge.svg)](https://coveralls.io/github/Yelp/undebt)
+
 # Undebt
 
 Undebt is a fast, straightforward, reliable tool for performing massive, automated code refactoring used [@Yelp](https://github.com/Yelp). Undebt lets you define complex find-and-replace rules using standard, straightforward Python that can be applied quickly to an entire code base with a simple command.
