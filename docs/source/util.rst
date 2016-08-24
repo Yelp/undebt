@@ -127,6 +127,9 @@ Same as `WHITE` but also matches new lines.
 **EXPR**
 Matches any valid Python expression.
 
+**EXPR_LIST, EXPR_IND_LIST**
+Matches one or more `EXPR` separated by `COMMA` for `EXPR_LIST` or `COMMA_IND` for `EXPR_IND_LIST`.
+
 **ATOM**
 Matches a single valid Python atom (that is, an expression without operators).
 
