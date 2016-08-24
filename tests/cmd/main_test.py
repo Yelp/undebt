@@ -6,6 +6,7 @@ from __future__ import print_function
 import os.path
 
 import mock
+from six import StringIO
 
 from undebt.cmd.main import main
 from undebt.examples import method_to_function
@@ -61,6 +62,13 @@ def test_directory():
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
+
+def test_dry_run():
+    args = ["undebt", "-i", method_to_function_input_path, "-p", method_to_function_path, "--verbose", "--dry-run"]
+    output = StringIO()
+    with mock.patch("sys.argv", args), mock.patch("sys.stdout", output):
+        main()
+    assert output.getvalue() == '>>> {}\n{}'.format(method_to_function_input_path, _read_output_file())
 
 def test_left_unchanged():
     assert _read_input_file() == method_to_function_input_contents
