@@ -1,0 +1,14 @@
+language: python
+python: 3.5
+env: # These should match the tox env list
+    - TOXENV=py27
+    - TOXENV=py34
+    - TOXENV=py35
+    - TOXENV=pypy
+install: pip install coveralls tox
+script: tox
+after_success: coveralls
+cache:
+    directories:
+        - $HOME/.cache/pip
+        - $HOME/.pre-commit
