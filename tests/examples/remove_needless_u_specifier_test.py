@@ -46,3 +46,19 @@ from __future__ import print_statement, unicode_literals, absolute_import
 
 derp herp "some string" herp derp
 """)
+
+
+def test_ignore_u_at_end_of_string():
+    patterns = get_patterns(remove_needless_u_specifier)
+    text = """
+from __future__ import unicode_literals
+
+subprocess.check_call(('mysql',
+                       '-u', 'test_user',))
+TITLE_LABELS = {
+    "en": ("Subject", ),
+    "ru": ("Тема", ),
+    "fr": ("Objet", "Sujet"),
+}
+"""
+    assert process(patterns, text) == text
