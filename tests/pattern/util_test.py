@@ -36,6 +36,13 @@ def test_trailing_whitespace():
 
 def test_in_string():
     test = "0123'567'9"
-    assert all(not in_string(x, test) for x in range(0, 5))
-    assert all(in_string(x, test) for x in range(5, 9))
-    assert all(not in_string(x, test) for x in range(9, 10))
+    assert not in_string(0, test)
+    assert not in_string(1, test)
+    assert not in_string(2, test)
+    assert not in_string(3, test)
+    assert not in_string(4, test)
+    assert in_string(5, test)
+    assert in_string(6, test)
+    assert in_string(7, test)
+    assert in_string(8, test)
+    assert not in_string(9, test)
