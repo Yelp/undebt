@@ -6,6 +6,8 @@ from __future__ import print_function
 from undebt.pattern.python import ATOM
 from undebt.pattern.python import BINARY_OP
 from undebt.pattern.python import EXPR
+from undebt.pattern.python import EXPR_IND_LIST
+from undebt.pattern.python import EXPR_LIST
 from undebt.pattern.python import HEADER
 from undebt.pattern.python import OP
 from undebt.pattern.testing import assert_parse
@@ -71,6 +73,40 @@ def test_EXPR():
         ],
         interval_list=[
             (9, 57),
+        ],
+    )
+
+
+def test_EXPR_LIST():
+    assert_parse(
+        grammar=EXPR_LIST,
+        text="""
+        derp + herp, herp.a.derp - 1, herp[derp],
+        """,
+        tokens_list=[
+            ["derp + herp, herp.a.derp - 1, herp[derp],"],
+        ],
+        interval_list=[
+            (9, 50),
+        ],
+    )
+
+
+def test_EXPR_IND_LIST():
+    assert_parse(
+        grammar=EXPR_IND_LIST,
+        text="""
+        derp + herp,
+        herp.a.derp - 1,
+        herp[derp]
+        """,
+        tokens_list=[
+            ["""derp + herp,
+        herp.a.derp - 1,
+        herp[derp]"""],
+        ],
+        interval_list=[
+            (9, 65),
         ],
     )
 

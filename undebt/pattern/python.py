@@ -16,6 +16,8 @@ from pyparsing import ZeroOrMore
 
 from undebt.pattern.common import BRACES
 from undebt.pattern.common import BRACKETS
+from undebt.pattern.common import COMMA
+from undebt.pattern.common import COMMA_IND
 from undebt.pattern.common import DOT
 from undebt.pattern.common import DOTTED_NAME
 from undebt.pattern.common import NAME
@@ -57,12 +59,15 @@ OP = ASSIGN_OP | UNARY_OP | BINARY_OP
 TRAILER = DOT + NAME | PARENS | BRACKETS
 TRAILERS = condense(ZeroOrMore(TRAILER))
 
+
 ATOM_BASE = NAME | NUM | PARENS | BRACKETS | BRACES | STRING
 ATOM = condense(ATOM_BASE + TRAILERS)
 UNARY_OP_ATOM = addspace(Optional(UNARY_OP) + ATOM)
 
 
 EXPR = addspace(UNARY_OP_ATOM + ZeroOrMore(BINARY_OP + UNARY_OP_ATOM))
+EXPR_LIST = condense(EXPR + ZeroOrMore(addspace(COMMA + EXPR)) + Optional(COMMA))
+EXPR_IND_LIST = originalTextFor(EXPR + ZeroOrMore(COMMA_IND + EXPR) + Optional(COMMA_IND))
 
 
 HEADER = originalTextFor(START_OF_FILE + ZeroOrMore(SKIP_TO_TEXT + (
