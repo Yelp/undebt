@@ -30,7 +30,6 @@ setup(
             "pytest",
             "mock",
             "coverage",
-            "six"
         ],
     },
     scripts=[
