@@ -20,7 +20,7 @@ Read it
 
     $ undebt --help
     usage: undebt [-h] [--input path] --pattern path [--extension ext]
-                  [--multiprocess processes] [--verbose]
+                  [--multiprocess processes] [--verbose] [--dry-run]
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -36,6 +36,7 @@ Read it
       --multiprocess processes, -m processes
                             number of processes to run in parallel (default is 16)
       --verbose
+      --dry-run, -d         only print to stdout; do not overwrite files
 
 Try it out
 ----------
