@@ -1,14 +1,23 @@
 language: python
 python: 3.5
 env: # These should match the tox env list
-    - TOXENV=py27
-    - TOXENV=py34
-    - TOXENV=py35
-    - TOXENV=pypy
+- TOXENV=py27
+- TOXENV=py34
+- TOXENV=py35
+- TOXENV=pypy
 install: pip install coveralls tox
 script: tox
 after_success: coveralls
 cache:
-    directories:
-        - $HOME/.cache/pip
-        - $HOME/.pre-commit
+  directories:
+  - $HOME/.cache/pip
+  - $HOME/.pre-commit
+deploy:
+  provider: pypi
+  user: evhub
+  password:
+    secure: O8RB66AhNQ37hLqTyUoAkFYDeMy+4vxJIjceOyZT3xKRB+nXcczM0JxgmlykM+1eTnjfYpJNkjDohNpAxDBhrSRQnJsEBNzRwk1RY7cX4nWgiJwCstw5X1Ob3ygWhusjy7FxAe5bdCnJN9WhRV0YFM75JGQ7XEue1C4fLzdpyXQJzXhOJAqwCZ3C/4hPrZR5Wy4s8r6KPk3ZNV1BFAX/jYD5DfFeSF3AG28GAJCmK1fFX5N7csyyHZ4Y2cd7zmspA/QuqNHKbu5wAovPue80kRG/g+l3F4mcPIEAHH24Us4AfQjWyCOI5dofRPCw4gX135t1l+kvjVZXr2ee5DaxoyGrEgGp6eFVRVvp5T9PGJHx174YXhFHI3a5EaT5Ix2unf/K0eb8cZv9OORrOJQ+yAsVWBVpQNwVm0YJmT8vU7EIu7T8VSgoegfCumT+G8lN+W7WqS0MgO3vxBN4F3xtF69uu3HXnH5T9AbJZMUu7NjbylL9c9arCtmQw9z+0AgCWCCjDJDIJ86gXUiAbPScBpjx27ePK+gZCbMKYaMPOh/Kdd70q0VKbS7QcWA7EdY4S5CrUC3ZLIIIqXpw3Hc3xdwRYDTJu6Edtra911B8L5fMvzJeB+/E/Fpj1pDkKdUwA/tkMk1/RGcuaZl2LBc07DuFOefnCClWMnrx/hgapC4=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: Yelp/undebt
