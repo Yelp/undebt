@@ -44,22 +44,13 @@ def _load_text(path):
 
 @_exit_fail_upon_error
 def _write_result_text(result_text, path, dry_run):
-    if dry_run:
-        if path:
-            sys.stdout.write('>>> {}\n'.format(path))
-        sys.stdout.write(result_text)
-        return
-
-    if not path:
-        file_obj = sys.stdout
+    if not dry_run and path:
+        with open(path, 'w') as file_obj:
+            file_obj.write(result_text)
     else:
-        file_obj = open(path, 'w')
-
-    try:
-        file_obj.write(result_text)
-    finally:
         if path:
-            file_obj.close()
+            print('>>> {}'.format(path), file=sys.stderr)
+        sys.stdout.write(result_text)
 
 
 @_exit_fail_upon_error
@@ -84,7 +75,7 @@ def _handle_arguments():
     parser.add_argument('--verbose', action='store_true', default=False)
     parser.add_argument(
         '--dry-run', '-d', action='store_true', default=False,
-        help='only output to screen, do not overwrite files')
+        help='only print to stdout; do not overwrite files')
     return parser.parse_args()
 
 
