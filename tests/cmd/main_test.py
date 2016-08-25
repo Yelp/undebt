@@ -62,6 +62,12 @@ def test_directory():
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
+def test_dry_run(capsys):
+    args = ["undebt", "-i", method_to_function_input_path, "-p", method_to_function_path, "--verbose", "--dry-run"]
+    with mock.patch("sys.argv", args):
+        main()
+    assert capsys.readouterr()[0] == '>>> {}\n{}'.format(method_to_function_input_path, _read_output_file())
+
 def test_left_unchanged():
     assert _read_input_file() == method_to_function_input_contents
     assert _read_output_file() == method_to_function_output_contents

@@ -43,7 +43,13 @@ def _load_text(path):
 
 
 @_exit_fail_upon_error
-def _write_result_text(result_text, path):
+def _write_result_text(result_text, path, dry_run):
+    if dry_run:
+        if path:
+            sys.stdout.write('>>> {}\n'.format(path))
+        sys.stdout.write(result_text)
+        return
+
     if not path:
         file_obj = sys.stdout
     else:
@@ -76,6 +82,9 @@ def _handle_arguments():
         '--multiprocess', '-m', metavar='processes', type=int, default=16,
         help='number of processes to run in parallel (default is 16)')
     parser.add_argument('--verbose', action='store_true', default=False)
+    parser.add_argument(
+        '--dry-run', '-d', action='store_true', default=False,
+        help='only output to screen, do not overwrite files')
     return parser.parse_args()
 
 
@@ -107,7 +116,7 @@ def _find_files(paths, extensions):
                         dirs.remove(d)
 
 
-def _process_file(patterns, text_file):
+def _process_file(patterns, text_file, dry_run):
     log.info('undebting {}'.format(text_file))
 
     text = _load_text(text_file)
@@ -119,22 +128,23 @@ def _process_file(patterns, text_file):
         return False
     else:
         if result_text != text:
-            _write_result_text(result_text, text_file)
+            _write_result_text(result_text, text_file, dry_run)
         return True
 
 
 class _file_processor(object):
     """Must be a class so it is pickleable."""
 
-    def __init__(self, pattern_files):
+    def __init__(self, pattern_files, dry_run):
         self.pattern_files = pattern_files
+        self.dry_run = dry_run
 
     @_exit_fail_upon_error
     def patterns(self):
         return patterns_from_files(self.pattern_files)
 
     def __call__(self, text_file):
-        return _process_file(self.patterns(), text_file)
+        return _process_file(self.patterns(), text_file, self.dry_run)
 
 
 def main():
@@ -147,7 +157,7 @@ def main():
         log.error('number of processes must be > 0')
         sys.exit(1)
 
-    processor = _file_processor(args.pattern)
+    processor = _file_processor(args.pattern, args.dry_run)
     files = list(_find_files(args.input, args.extension))
 
     if bool(files) != bool(args.input):
