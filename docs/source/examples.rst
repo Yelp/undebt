@@ -148,3 +148,19 @@ Example of:
 - using `in_string` to determine if the match location is inside of a string
 - `originalTextFor` to make grammar elements parse to the original text that matched them
 - `STRING` to match any valid string
+
+`undebt.examples.swift`
+-----------------------------------
+(`Source
+<https://github.com/Yelp/undebt/blob/master/undebt/examples/swift.py>`_)
+
+Transforms uses of `if let where` from Swift 2.2 to the updated syntax in Swift
+3.0.
+
+Example of:
+
+- using `tokens_as_dict` to assert multiple possible dictionary keys
+- `EXPR` to match a Python expression
+  - Note: It's possible that this won't match all Swift expressions; if you are
+    concerned about this, you should use an EXPR pattern that corresponds to
+    the Swift grammar.
