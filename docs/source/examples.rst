@@ -159,8 +159,5 @@ Transforms uses of `if let where` from Swift 2.2 to the updated syntax in Swift
 
 Example of:
 
-- using `tokens_as_dict` to assert multiple possible dictionary keys
-- `EXPR` to match a Python expression
-  - Note: It's possible that this won't match all Swift expressions; if you are
-    concerned about this, you should use an EXPR pattern that corresponds to
-    the Swift grammar.
+- using Undebt to transform a language that isn't Python
+_Note: It's possible that the `EXPR` grammar element used won't match all Swift expressions; if you are concerned about this, you should define a custom `EXPR` corresponding to the syntax of a Swift expression._
