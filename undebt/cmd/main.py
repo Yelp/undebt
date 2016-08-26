@@ -67,8 +67,7 @@ def _handle_arguments():
         '-e',
         metavar='ext',
         action='append',
-        help='extensions of files to be modified when searching a directory'
-        ' (exclude ".", e.g. "py" instead of ".py")')
+        help='extensions of files to be modified when searching a directory')
     parser.add_argument(
         '--multiprocess', '-m', metavar='processes', type=int, default=16,
         help='number of processes to run in parallel (default is 16)')
@@ -77,6 +76,20 @@ def _handle_arguments():
         '--dry-run', '-d', action='store_true', default=False,
         help='only print to stdout; do not overwrite files')
     return parser.parse_args()
+
+
+@_exit_fail_upon_error
+def _fix_exts(extensions):
+    if extensions is None:
+        return None
+
+    new_exts = []
+    for ext in extensions:
+        if ext.startswith("."):
+            new_exts.append(ext[1:])
+        else:
+            new_exts.append(ext)
+    return new_exts
 
 
 @_exit_fail_upon_error
@@ -149,7 +162,7 @@ def main():
         sys.exit(1)
 
     processor = _file_processor(args.pattern, args.dry_run)
-    files = list(_find_files(args.input, args.extension))
+    files = list(_find_files(args.input, _fix_exts(args.extension)))
 
     if bool(files) != bool(args.input):
         log.error('could not find any files for the given paths and extension')
