@@ -19,7 +19,6 @@ from undebt.pattern.common import BRACKETS
 from undebt.pattern.common import COMMA
 from undebt.pattern.common import COMMA_IND
 from undebt.pattern.common import DOT
-from undebt.pattern.common import DOTTED_NAME
 from undebt.pattern.common import NAME
 from undebt.pattern.common import NL
 from undebt.pattern.common import NO_BS_NL
@@ -73,5 +72,5 @@ EXPR_IND_LIST = originalTextFor(EXPR + ZeroOrMore(COMMA_IND + EXPR) + Optional(C
 HEADER = originalTextFor(START_OF_FILE + ZeroOrMore(SKIP_TO_TEXT + (
     STRING
     | pythonStyleComment
-    | Optional(Keyword("from") + SkipTo("import")) + Keyword("import") + Optional(PARENS) + SkipTo(NO_BS_NL)
+    | Optional(Keyword("from") + SkipTo("import")) + Keyword("import") + (PARENS | SkipTo(NO_BS_NL))
 ) + NL))
