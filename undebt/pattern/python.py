@@ -73,5 +73,5 @@ EXPR_IND_LIST = originalTextFor(EXPR + ZeroOrMore(COMMA_IND + EXPR) + Optional(C
 HEADER = originalTextFor(START_OF_FILE + ZeroOrMore(SKIP_TO_TEXT + (
     STRING
     | pythonStyleComment
-    | Optional(Keyword("from") + DOTTED_NAME) + Keyword("import") + SkipTo(NO_BS_NL)
+    | Optional(Keyword("from") + SkipTo("import")) + Keyword("import") + Optional(PARENS) + SkipTo(NO_BS_NL)
 ) + NL))
