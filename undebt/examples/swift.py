@@ -7,6 +7,7 @@ from pyparsing import delimitedList
 from pyparsing import Keyword
 from pyparsing import Literal
 from pyparsing import SkipTo
+
 from undebt.pattern.common import NAME
 from undebt.pattern.python import EXPR
 from undebt.pattern.util import condense
@@ -33,8 +34,8 @@ def replace(tokens):
 
     def pretty_assign(assign):
         op = assign.index("=")
-        l, r = assign[:op], assign[op+1:]
+        l, r = assign[:op], assign[op + 1:]
         return "{0} = {1}".format(l, r)
 
     new_assigns = ", let ".join(map(pretty_assign, assigns))
-    return "if let " + new_assigns + ", " + cond
+    return "if let " + new_assigns + ", " + cond + "{"
