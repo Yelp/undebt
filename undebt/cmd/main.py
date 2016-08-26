@@ -62,6 +62,7 @@ def _handle_arguments():
     parser.add_argument(
         '--pattern', '-p', metavar='path', action='append', required=True,
         help='paths to pattern definition files')
+    # TODO: add --grep option. Example of usage: undebt -p <my_pattern> --grep <some string>
     parser.add_argument(
         '--extension',
         '-e',
