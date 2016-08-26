@@ -124,7 +124,15 @@ from __future__ import herpaderp
 import start
 from derp import herp
 from herpderp import herp, \\
- derp
+    derp
+from foo import *
+from foo import (
+    bar,
+    baz as foobar)
+from .bar import *
+from .bar import alpha, beta
+from . import baz
+
 
 first
 second
@@ -139,9 +147,16 @@ from __future__ import herpaderp
 import start
 from derp import herp
 from herpderp import herp, \\
- derp
+    derp
+from foo import *
+from foo import (
+    bar,
+    baz as foobar)
+from .bar import *
+from .bar import alpha, beta
+from . import baz
 ''']],
         interval_list=[
-            (0, 162),
+            (0, 295),
         ],
     )
