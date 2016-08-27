@@ -49,21 +49,21 @@ def _read_output_file():
 
 
 def test_single_file():
-    args = ["undebt", "-i", method_to_function_input_path, "-p", method_to_function_path, "--verbose"]
+    args = ["undebt", "-p", method_to_function_path, method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
 def test_directory():
-    args = ["undebt", "-i", tests_inputs_directory, "-p", method_to_function_path, "-e", "txt", "--verbose"]
+    args = ["undebt", "-p", method_to_function_path, "-e", "txt", tests_inputs_directory, "--verbose"]
     with mock.patch("sys.argv", args):
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
 def test_dry_run(capsys):
-    args = ["undebt", "-i", method_to_function_input_path, "-p", method_to_function_path, "--verbose", "--dry-run"]
+    args = ["undebt", "-p", method_to_function_path, "--dry-run", method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
         main()
     out, err = capsys.readouterr()
