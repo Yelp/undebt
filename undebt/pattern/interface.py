@@ -80,6 +80,8 @@ def patterns_from_files(pattern_files):
 
 def load_module(path):
     """Loads a module from its path."""
+    if module_like(path):
+        path = module_name_to_path(path)
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
 
@@ -89,6 +91,10 @@ def module_like(path):
         return False
 
     return bool(_module_re.match(path))
+
+
+def module_name_to_path(module_name):
+    return module_name.replace('.', '/') + '.py'
 
 
 def create_find_and_replace(grammar, replace):

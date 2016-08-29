@@ -8,6 +8,7 @@ import mock
 from undebt.examples import attribute_to_function
 from undebt.pattern.interface import get_patterns
 from undebt.pattern.interface import module_like
+from undebt.pattern.interface import module_name_to_path
 from undebt.pattern.interface import _get_patterns
 from undebt.pattern.python import HEADER
 
@@ -53,3 +54,9 @@ def test_module_like():
     assert module_like('foo.bar.baz')
     assert not module_like('foo/bar.py')
     assert not module_like('bar.py')
+
+
+def test_module_name_to_path():
+    assert module_name_to_path('foo') == 'foo.py'
+    assert module_name_to_path('foo.bar') == 'foo/bar.py'
+    assert module_name_to_path('foo.bar.baz') == 'foo/bar/baz.py'
