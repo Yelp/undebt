@@ -131,8 +131,8 @@ def main():
     if not files:  # Single process mode if stdin
         log.info('running in stdin/stdout mode')
         processor(None)
+        return
 
-    else:
-        log.info('running across {} file(s)'.format(len(files)))
-        for f in files:
-            processor(f)
+    log.info('running across {} file(s)'.format(len(files)))
+    for f in files:
+        processor(f)
