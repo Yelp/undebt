@@ -6,3 +6,4 @@ mock==2.0.0
 pre-commit==0.7.6
 sphinx==1.4.1
 sphinxcontrib-programoutput==0.8
+tox==2.3.1
