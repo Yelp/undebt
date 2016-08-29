@@ -84,8 +84,9 @@ Try it out
 Tips and Tricks
 ---------------
 
-Most of these will make use of
-```xargs`` <http://man7.org/linux/man-pages/man1/xargs.1.html>`_
+Most of these will make use of xargs_
+
+.. _xargs: http://man7.org/linux/man-pages/man1/xargs.1.html
 
 Using with ``grep``/``git grep`` to find files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -93,6 +94,7 @@ Using with ``grep``/``git grep`` to find files
 .. code-block:: bash
 
     grep -l <search-text> **/*.css | xargs undebt -p <path-to-pattern>
+    
     # Use git grep if you only want to search tracked files
     git grep -l <search-text> | xargs undebt -p <path-to-pattern>
 
