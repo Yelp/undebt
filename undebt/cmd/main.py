@@ -73,17 +73,6 @@ def _handle_arguments():
     return parser.parse_args()
 
 
-@_exit_fail_upon_error
-def _find_files(paths):
-    if paths is None:
-        return
-
-    for path in paths:
-
-        if os.path.isfile(path):
-            yield path
-
-
 def _process_file(patterns, text_file, dry_run):
     log.info('undebting {}'.format(text_file))
 
@@ -122,11 +111,7 @@ def main():
     logger.setup(args.verbose)  # Reset logging level
 
     processor = _file_processor(args.pattern, args.dry_run)
-    files = list(_find_files(args.files))
-
-    if bool(files) != bool(args.files):
-        log.error('could not find any files for the given paths')
-        sys.exit(1)
+    files = args.files
 
     if not files:  # Single process mode if stdin
         log.info('running in stdin/stdout mode')
