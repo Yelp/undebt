@@ -5,6 +5,7 @@ from __future__ import print_function
 
 import imp
 import os
+import re
 import sys
 
 from pyparsing import _trim_arity
@@ -12,6 +13,11 @@ from pyparsing import _trim_arity
 from undebt.cmd.logger import log
 from undebt.pattern.util import attach
 from undebt.pattern.util import tokens_as_list
+
+
+# _module_re is not _strictly_ correct, but we do a quick check for strings
+# ending in .py before running the regex.
+_module_re = re.compile(r'^\w+(\.\w+)*$')
 
 
 # required at the beginning of a string to be able to properly parse it
@@ -76,6 +82,13 @@ def load_module(path):
     """Loads a module from its path."""
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
+
+
+def module_like(path):
+    if path.endswith('.py'):
+        return False
+
+    return bool(_module_re.match(path))
 
 
 def create_find_and_replace(grammar, replace):
