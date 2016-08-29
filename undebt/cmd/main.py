@@ -57,21 +57,21 @@ def _write_result_text(result_text, path, dry_run):
 def _handle_arguments():
     parser = argparse.ArgumentParser(prog='undebt')
     parser.add_argument(
-        '--input', '-i', metavar='path', action='append',
-        help='paths to files or directories (searched recursively for extension) to be modified (if not passed uses stdin)')
+        'paths', nargs='*', metavar='PATH',
+        help='paths to files or directories (searches for extension recursively) to be modified; '
+        'uses stdin if not passed')
     parser.add_argument(
-        '--pattern', '-p', metavar='path', action='append', required=True,
+        '--pattern', '-p', metavar='PATH', action='append', required=True,
         help='paths to pattern definition files')
     parser.add_argument(
-        '--extension',
-        '-e',
-        metavar='ext',
-        action='append',
+        '--extension', '-e', metavar='EXT', action='append',
         help='extensions of files to be modified when searching a directory')
     parser.add_argument(
-        '--multiprocess', '-m', metavar='processes', type=int, default=16,
+        '--jobs', '-j', metavar='INTEGER', type=int, default=16,
         help='number of processes to run in parallel (default is 16)')
-    parser.add_argument('--verbose', action='store_true', default=False)
+    parser.add_argument(
+        '--verbose', '-v', action='store_true', default=False,
+        help='verbose logging for troubleshooting')
     parser.add_argument(
         '--dry-run', '-d', action='store_true', default=False,
         help='only print to stdout; do not overwrite files')
@@ -157,14 +157,14 @@ def main():
     args = _handle_arguments()
     logger.setup(args.verbose)  # Reset logging level
 
-    if args.multiprocess <= 0:
+    if args.jobs <= 0:
         log.error('number of processes must be > 0')
         sys.exit(1)
 
     processor = _file_processor(args.pattern, args.dry_run)
-    files = list(_find_files(args.input, _fix_exts(args.extension)))
+    files = list(_find_files(args.paths, _fix_exts(args.extension)))
 
-    if bool(files) != bool(args.input):
+    if bool(files) != bool(args.paths):
         log.error('could not find any files for the given paths and extension')
         sys.exit(1)
 
@@ -172,13 +172,13 @@ def main():
         log.info('running in stdin/stdout mode')
         processor(None)
 
-    elif len(files) == 1 or args.multiprocess == 1:  # Single process if only one file or only one process
+    elif len(files) == 1 or args.jobs == 1:  # Single process if only one file or only one process
         log.info('running across {} file(s) using a single process'
                  .format(len(files)))
         processor(files[0])
 
     else:
-        process_pool = multiprocessing.Pool(args.multiprocess)
+        process_pool = multiprocessing.Pool(args.jobs)
         try:
 
             result = process_pool.map_async(
@@ -188,7 +188,7 @@ def main():
             process_pool.close()
 
             log.info('running across {} file(s) using {} processes'
-                     .format(len(files), args.multiprocess))
+                     .format(len(files), args.jobs))
 
             # Cannot do process_pool.wait() because it prevents KeyboardInterrupt from being sent
             # See http://stackoverflow.com/questions/1408356/keyboard-interrupts-with-pythons-multiprocessing-pool
