@@ -19,15 +19,18 @@ Read it
 .. code-block:: bash
 
     $ undebt --help
-    usage: undebt [-h] [--input path] --pattern path [--extension ext]
+    usage: undebt [-h] --pattern path [--extension ext]
                   [--multiprocess processes] [--verbose] [--dry-run]
+                  [PATH [PATH...]]
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      --input path, -i path
+    positional arguments:
+      PATH [PATH...]
                             paths to files or directories (searched recursively
                             for extension) to be modified (if not passed uses
                             stdin)
+
+    optional arguments:
+      -h, --help            show this help message and exit
       --pattern path, -p path
                             paths to pattern definition files
       --extension ext, -e ext
@@ -43,7 +46,7 @@ Try it out
 
 .. code-block:: bash
 
-    $ undebt -p ./undebt/examples/method_to_function.py -i ./tests/inputs/method_to_function_input.txt
+    $ undebt -p ./undebt/examples/method_to_function.py ./tests/inputs/method_to_function_input.txt
     $ git diff
     diff --git a/tests/inputs/method_to_function_input.txt b/tests/inputs/method_to_function_input.txt
     index f268ab9..7681c63 100644
@@ -77,3 +80,35 @@ Try it out
                      ),
                  )
      something after code pattern
+
+Tips and Tricks
+---------------
+
+Most of these will make use of
+```xargs`` <http://man7.org/linux/man-pages/man1/xargs.1.html>`_
+
+Using with ``grep``/``git grep`` to find files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    grep -l <search-text> **/*.css | xargs undebt -p <path-to-pattern>
+    # Use git grep if you only want to search tracked files
+    git grep -l <search-text> | xargs undebt -p <path-to-pattern>
+
+Using ``find`` to limit to a particular extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    find -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
+
+Using ``xargs`` to work in parallel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``xargs`` takes a ``-P`` flag, which specifies the maximum number of processes
+to use.
+
+.. code-block:: bash
+
+    git grep -l <search-text> | xargs -P <numprocs> undebt -p <path-to-pattern>
