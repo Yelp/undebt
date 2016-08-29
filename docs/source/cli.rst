@@ -19,15 +19,18 @@ Read it
 .. code-block:: bash
 
     $ undebt --help
-    usage: undebt [-h] [--input path] --pattern path [--extension ext]
+    usage: undebt [-h] --pattern path [--extension ext]
                   [--multiprocess processes] [--verbose] [--dry-run]
+                  FILE [FILE...]
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      --input path, -i path
+    positional arguments:
+      FILE [FILE...]
                             paths to files or directories (searched recursively
                             for extension) to be modified (if not passed uses
                             stdin)
+
+    optional arguments:
+      -h, --help            show this help message and exit
       --pattern path, -p path
                             paths to pattern definition files
       --extension ext, -e ext
@@ -43,7 +46,7 @@ Try it out
 
 .. code-block:: bash
 
-    $ undebt -p ./undebt/examples/method_to_function.py -i ./tests/inputs/method_to_function_input.txt
+    $ undebt -p ./undebt/examples/method_to_function.py ./tests/inputs/method_to_function_input.txt
     $ git diff
     diff --git a/tests/inputs/method_to_function_input.txt b/tests/inputs/method_to_function_input.txt
     index f268ab9..7681c63 100644
