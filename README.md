@@ -57,10 +57,16 @@ Most of these will make use of
 ### Using with `grep`/`git grep` to find files
 
 ```bash
-grep -l <search> | xargs undebt -p path/to/pattern.py
+grep -l <search-text> | xargs undebt -p <path-to-pattern>
 
 # Use git grep if you only want to search tracked files
-git grep -l <my-search-text> | xargs undebt -p path/to/pattern.py
+git grep -l <search-text> | xargs undebt -p <path-to-pattern>
+```
+
+### Using `find` to limit to a particular extension
+
+```bash
+find . -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
 ```
 
 ### Using `xargs` to work in parallel
@@ -69,5 +75,5 @@ git grep -l <my-search-text> | xargs undebt -p path/to/pattern.py
 use.
 
 ```bash
-git grep -l <search> | xargs -P <numprocs> undebt -p path/to/pattern.py
+git grep -l <search-text> | xargs -P <numprocs> undebt -p <path-to-pattern>
 ```
