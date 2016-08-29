@@ -32,7 +32,7 @@ Read it
       -h, --help            show this help message and exit
       --pattern PATH, -p PATH
                             paths to pattern definition files
-      --verbose
+      --verbose, -v
       --dry-run, -d         only print to stdout; do not overwrite files
 
 Try it out
