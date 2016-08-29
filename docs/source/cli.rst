@@ -92,7 +92,7 @@ Using with ``grep``/``git grep`` to find files
 
 .. code-block:: bash
 
-    grep -l <search-text> | xargs undebt -p <path-to-pattern>
+    grep -l <search-text> **/*.css | xargs undebt -p <path-to-pattern>
     # Use git grep if you only want to search tracked files
     git grep -l <search-text> | xargs undebt -p <path-to-pattern>
 
