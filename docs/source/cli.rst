@@ -19,7 +19,7 @@ Read it
 .. code-block:: bash
 
     $ undebt --help
-    usage: undebt [-h] --pattern path [--extension ext] [--verbose] [--dry-run]
+    usage: undebt [-h] --pattern PATH [--verbose] [--dry-run]
                   [FILE [FILE...]]
 
     positional arguments:
@@ -30,7 +30,7 @@ Read it
 
     optional arguments:
       -h, --help            show this help message and exit
-      --pattern path, -p path
+      --pattern PATH, -p PATH
                             paths to pattern definition files
       --verbose
       --dry-run, -d         only print to stdout; do not overwrite files
