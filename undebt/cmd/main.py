@@ -55,8 +55,8 @@ def _write_result_text(result_text, path, dry_run):
 def _handle_arguments():
     parser = argparse.ArgumentParser(prog='undebt')
     parser.add_argument(
-        'paths', nargs='*', metavar='PATH',
-        help='paths to files to be modified; ' 'uses stdin if not passed',
+        'files', nargs='*', metavar='FILE',
+        help='files to be modified; uses stdin if not passed',
     )
     parser.add_argument(
         '--pattern', '-p', metavar='PATH', action='append', required=True,
@@ -122,9 +122,9 @@ def main():
     logger.setup(args.verbose)  # Reset logging level
 
     processor = _file_processor(args.pattern, args.dry_run)
-    files = list(_find_files(args.paths))
+    files = list(_find_files(args.files))
 
-    if bool(files) != bool(args.paths):
+    if bool(files) != bool(args.files):
         log.error('could not find any files for the given paths')
         sys.exit(1)
 
