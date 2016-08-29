@@ -21,10 +21,10 @@ Read it
     $ undebt --help
     usage: undebt [-h] --pattern path [--extension ext]
                   [--multiprocess processes] [--verbose] [--dry-run]
-                  FILE [FILE...]
+                  [PATH [PATH...]]
 
     positional arguments:
-      FILE [FILE...]
+      PATH [PATH...]
                             paths to files or directories (searched recursively
                             for extension) to be modified (if not passed uses
                             stdin)
