@@ -48,3 +48,26 @@ from undebt.examples.class_inherit_object import grammar, replace
 undebt --pattern ./my_class_inherit_object.py <directory or file to undebt> ...
 ```
 If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html)._
+
+## Tips
+
+Most of these will make use of
+[`xargs`](http://man7.org/linux/man-pages/man1/xargs.1.html).
+
+### Using with `grep`/`git grep` to find files
+
+```bash
+grep -l <search> | xargs undebt -p path/to/pattern.py
+
+# Use git grep if you only want to search tracked files
+git grep -l <my-search-text> | xargs undebt -p path/to/pattern.py
+```
+
+### Using `xargs` to work in parallel
+
+`xargs` takes a `-P` flag, which specifies the maximum number of processes to
+use.
+
+```bash
+git grep -l <search> | xargs -P <numprocs> undebt -p path/to/pattern.py
+```
