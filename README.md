@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.org/Yelp/undebt.svg?branch=master)](https://travis-ci.org/Yelp/undebt)
 [![Coverage Status](https://coveralls.io/repos/github/Yelp/undebt/badge.svg)](https://coveralls.io/github/Yelp/undebt)
 [![PyPI version](https://badge.fury.io/py/undebt.svg)](https://badge.fury.io/py/undebt)
-[![GitHub version](https://badge.fury.io/gh/Yelp%2Fundebt.svg)](https://badge.fury.io/gh/Yelp%2Fundebt)
 
 # Undebt
 
