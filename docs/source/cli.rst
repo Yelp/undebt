@@ -19,12 +19,11 @@ Read it
 .. code-block:: bash
 
     $ undebt --help
-    usage: undebt [-h] --pattern path [--extension ext]
-                  [--multiprocess processes] [--verbose] [--dry-run]
-                  [PATH [PATH...]]
+    usage: undebt [-h] --pattern path [--extension ext] [--verbose] [--dry-run]
+                  [FILE [FILE...]]
 
     positional arguments:
-      PATH [PATH...]
+      FILE [FILE...]
                             paths to files or directories (searched recursively
                             for extension) to be modified (if not passed uses
                             stdin)
@@ -33,11 +32,6 @@ Read it
       -h, --help            show this help message and exit
       --pattern path, -p path
                             paths to pattern definition files
-      --extension ext, -e ext
-                            extensions of files to be modified when searching a
-                            directory (exclude ".", e.g. "py" instead of ".py")
-      --multiprocess processes, -m processes
-                            number of processes to run in parallel (default is 16)
       --verbose
       --dry-run, -d         only print to stdout; do not overwrite files
 
