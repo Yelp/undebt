@@ -46,4 +46,6 @@ from undebt.examples.class_inherit_object import grammar, replace
 ```bash
 undebt --pattern ./my_class_inherit_object.py <directory or file to undebt> ...
 ```
-If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html)._ We also include some [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you can use undebt in conjunction with other common Unix utilities.
+If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html)._
+
+We also include some [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you can use undebt in conjunction with other common Unix utilities.
