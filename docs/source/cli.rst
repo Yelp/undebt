@@ -101,7 +101,7 @@ Using ``find`` to limit to a particular extension
 
 .. code-block:: bash
 
-    find . -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
+    find -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
 
 Using ``xargs`` to work in parallel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
