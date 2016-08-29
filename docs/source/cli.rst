@@ -80,3 +80,35 @@ Try it out
                      ),
                  )
      something after code pattern
+
+Tips and Tricks
+---------------
+
+Most of these will make use of
+```xargs`` <http://man7.org/linux/man-pages/man1/xargs.1.html>`_
+
+Using with ``grep``/``git grep`` to find files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    grep -l <search-text> | xargs undebt -p <path-to-pattern>
+    # Use git grep if you only want to search tracked files
+    git grep -l <search-text> | xargs undebt -p <path-to-pattern>
+
+Using ``find`` to limit to a particular extension
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+    find . -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
+
+Using ``xargs`` to work in parallel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+``xargs`` takes a ``-P`` flag, which specifies the maximum number of processes
+to use.
+
+.. code-block:: bash
+
+    git grep -l <search-text> | xargs -P <numprocs> undebt -p <path-to-pattern>
