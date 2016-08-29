@@ -55,13 +55,6 @@ def test_single_file():
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
-def test_directory():
-    args = ["undebt", "-p", method_to_function_path, "-e", "txt", tests_inputs_directory, "--verbose"]
-    with mock.patch("sys.argv", args):
-        main()
-    assert _read_input_file() == method_to_function_output_contents == _read_output_file()
-
-
 def test_dry_run(capsys):
     args = ["undebt", "-p", method_to_function_path, "--dry-run", method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
