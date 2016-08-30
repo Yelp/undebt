@@ -31,7 +31,7 @@ Read it
     optional arguments:
       -h, --help            show this help message and exit
       --pattern PATH, -p PATH
-                            paths to pattern definition files
+                            paths to pattern definition files or modules
       --verbose, -v
       --dry-run, -d         only print to stdout; do not overwrite files
 

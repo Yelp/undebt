@@ -122,6 +122,16 @@ def test_single_file():
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
+def test_loading_pattern_with_module_name():
+    # Need full module name here
+    import undebt.examples.method_to_function
+    module_name = undebt.examples.method_to_function.__name__
+    args = ["undebt", "-p", module_name, method_to_function_input_path, "--verbose"]
+    with mock.patch("sys.argv", args):
+        main()
+    assert _read_input_file() == method_to_function_output_contents == _read_output_file()
+
+
 def test_dry_run(capsys):
     args = ["undebt", "-p", method_to_function_path, "--dry-run", method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
