@@ -3,11 +3,30 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import mock
+from pyparsing import Keyword
+
 from undebt.pattern.testing import assert_parse
+from undebt.pattern.util import debug
 from undebt.pattern.util import in_string
 from undebt.pattern.util import leading_whitespace
 from undebt.pattern.util import quoted
 from undebt.pattern.util import trailing_whitespace
+
+
+@mock.patch('__builtin__.print')
+def test_debug(mock_print):
+    assert_parse(
+        grammar=debug(Keyword('something')),
+        text="something",
+        tokens_list=[
+            [mock_print.return_value],
+        ],
+        interval_list=[
+            (0, 9)
+        ],
+    )
+    assert mock_print.call_count == 1
 
 
 def test_quoted():
