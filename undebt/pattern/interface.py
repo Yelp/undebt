@@ -4,6 +4,7 @@ from __future__ import division
 from __future__ import print_function
 
 import imp
+import importlib
 import os
 import re
 import sys
@@ -84,18 +85,7 @@ def load_module(path):
 
 def _load_module(full_name):
     try:
-        sys.path = [os.getcwd()] + sys.path
-        (mod, path) = (None, None)
-        for name in full_name.split('.'):
-            # path=None defaults to sys.path (along with some other special
-            # places), which is why we shim it to include the cwd.
-            (f, p, d) = imp.find_module(name, path)
-            mod = imp.load_module(name, f, p, d)
-            # If `mod` is the final submodule, it will not have a __path__
-            # attribute.
-            path = getattr(mod, '__path__', None)
-
-        return mod
+        return importlib.import_module(full_name)
     except ImportError as e:
         raise e
     finally:
