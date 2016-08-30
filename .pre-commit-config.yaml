@@ -1,5 +1,5 @@
 -   repo: git://github.com/pre-commit/pre-commit-hooks.git
-    sha: 003e43251aea1da33f2072f2365ec8b9ceaae070
+    sha: 09d1747840bfb1457e9b8876b4c1f577d00a2a37
     hooks:
     -   id: autopep8-wrapper
         args:
@@ -18,12 +18,14 @@
     -   id: trailing-whitespace
     -   id: check-added-large-files
 -   repo: git://github.com/asottile/reorder_python_imports.git
-    sha: 3d86483455ab5bd06cc1069fdd5ac57be5463f10
+    sha: b022734351abe44d0b05a71a4fa1175287c59b49
     hooks:
     -   id: reorder-python-imports
         language_version: python2.7
-        args: [--remove-import, 'from __future__ import with_statement']
+        args:
+        - --remove-import
+        - from __future__ import with_statement
 -   repo: https://github.com/Lucas-C/pre-commit-hooks.git
-    sha: 181a63c511691da58116fa19a7241956018660bc
+    sha: a388fdbbf40b44089ca1bcb9a03f89e0ae4380b1
     hooks:
     -   id: remove-tabs
