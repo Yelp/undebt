@@ -39,3 +39,12 @@ def test_dbl_quote_docstring():
     def derp():
         """doc"""
 ''')
+
+
+def test_no_change():
+    patterns = get_patterns(dbl_quote_docstring)
+    text = """
+    def derp():
+        '''inside\"\"\"str'''
+"""
+    assert process(patterns, text) == (text)

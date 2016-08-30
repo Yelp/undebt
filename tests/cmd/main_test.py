@@ -7,6 +7,10 @@ import os.path
 
 import mock
 
+from undebt.cmd.main import _exit_fail_upon_error
+from undebt.cmd.main import _load_text
+from undebt.cmd.main import _process_file
+from undebt.cmd.main import _write_result_text
 from undebt.cmd.main import main
 from undebt.examples import method_to_function
 
@@ -46,6 +50,69 @@ def _read_output_file():
             f.seek(0)
             f.truncate()
             f.write(method_to_function_output_contents)
+
+
+@mock.patch('undebt.cmd.main.sys.exit')
+def test_exit_fail_upon_error_with_exception(mock_exit):
+
+    @_exit_fail_upon_error
+    def fake_func():
+        raise Exception('fake exception')
+
+    fake_func()
+    mock_exit.assert_called_once_with(1)
+
+
+@mock.patch('undebt.cmd.main.sys.stdin')
+def test_load_text_is_none(mock_stdin):
+    assert _load_text(None) == mock_stdin.read.return_value
+
+
+@mock.patch('undebt.cmd.main.sys.stdout')
+def test_write_text_file_dry_run_with_path(mock_stdout):
+    fake_result_text = mock.Mock()
+    _write_result_text(
+        result_text=fake_result_text,
+        path=None,
+        dry_run=False,
+    )
+    mock_stdout.write.assert_called_once_with(fake_result_text)
+
+
+@mock.patch('undebt.cmd.main._load_text')
+@mock.patch('undebt.cmd.main.process')
+def test_process_file_with_exception(mock_process, mock_load_text):
+    fake_patterns = mock.MagicMock()
+    fake_text_file = mock.Mock()
+    mock_process.side_effect = Exception('fake exception')
+
+    assert _process_file(
+        patterns=fake_patterns,
+        text_file=fake_text_file,
+        dry_run=False,
+    ) is False
+
+
+@mock.patch('undebt.cmd.main._load_text')
+@mock.patch('undebt.cmd.main.process')
+def test_process_file_raises_exception(mock_process, mock_load_text):
+    fake_patterns = mock.MagicMock()
+    fake_text_file = mock.Mock()
+    mock_load_text.return_value = mock_process.return_value = 'text does not change after process'
+
+    assert _process_file(
+        patterns=fake_patterns,
+        text_file=fake_text_file,
+        dry_run=False,
+    ) is True
+
+
+@mock.patch('undebt.cmd.main._file_processor')
+def test_no_file(mock_file_processor):
+    args = ['undebt', '-p', method_to_function_path]
+    with mock.patch('sys.argv', args):
+        main()
+    mock_file_processor().assert_called_once_with(None)
 
 
 def test_single_file():

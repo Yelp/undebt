@@ -13,9 +13,7 @@ grammar = HEADER
 @tokens_as_list(assert_len=1)
 def replace(original, location, tokens):
     header, original_without_header = tokens[0], original[len(tokens[0]):]
-    if "function" in original_without_header:
-        return None
-    elif "from function_lives_here import function\n" in header:
+    if "function" not in original_without_header and "from function_lives_here import function\n" in header:
         return header.replace("from function_lives_here import function\n", "")
-    else:
-        return None
+
+    return None
