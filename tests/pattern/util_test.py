@@ -3,6 +3,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+import sys
+
 import mock
 from pyparsing import Keyword
 
@@ -14,7 +16,13 @@ from undebt.pattern.util import quoted
 from undebt.pattern.util import trailing_whitespace
 
 
-@mock.patch('__builtin__.print')
+if sys.version_info.major == 3:
+    builtin_module_name = 'builtins'
+else:
+    builtin_module_name = '__builtin__'
+
+
+@mock.patch('{}.print'.format(builtin_module_name))
 def test_debug(mock_print):
     assert_parse(
         grammar=debug(Keyword('something')),
