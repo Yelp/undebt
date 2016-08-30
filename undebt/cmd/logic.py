@@ -11,14 +11,11 @@ from undebt.pattern.interface import parse_grammar
 def process(patterns, text):
     """Return text modified by patterns."""
 
-    for i in range(len(patterns)):
-        if isinstance(patterns[i], tuple):
-            inner_patterns = [patterns[i]]
-        else:
-            inner_patterns = patterns[i]
+    for i, p in enumerate(patterns):
+        pattern = _fix_pattern(p)
 
         found = []
-        for grammar, replace in inner_patterns:
+        for grammar, replace in pattern:
 
             find_and_replace = create_find_and_replace(grammar, replace)
             results = parse_grammar(find_and_replace, text)
@@ -36,6 +33,13 @@ def process(patterns, text):
                      .format(i + 1))
 
     return text
+
+
+def _fix_pattern(pattern):
+    if isinstance(pattern, tuple):
+        return [pattern]
+    else:
+        return pattern
 
 
 def _transform_results(results, text):
