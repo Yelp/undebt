@@ -15,11 +15,6 @@ from undebt.pattern.util import attach
 from undebt.pattern.util import tokens_as_list
 
 
-# _module_re is not _strictly_ correct, but we do a quick check for strings
-# ending in .py before running the regex.
-_module_re = re.compile(r'^\w+(\.\w+)*$')
-
-
 # required at the beginning of a string to be able to properly parse it
 #  " " is necessary to make START_OF_FILE work properly
 PARSING_PREFIX = " "
@@ -84,6 +79,11 @@ def load_module(path):
         path = module_name_to_path(path)
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
+
+
+# _module_re is not _strictly_ correct, but we do a quick check for strings
+# ending in .py before running the regex.
+_module_re = re.compile(r'^\w+(\.\w+)*$')
 
 
 def module_like(path):
