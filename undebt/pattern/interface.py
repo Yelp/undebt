@@ -3,9 +3,8 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import imp
 import os
-import re
+import os.path
 import sys
 
 from pyparsing import _trim_arity
@@ -75,23 +74,19 @@ def patterns_from_files(pattern_files):
 
 def load_module(path):
     """Loads a module from its path."""
-    if module_like(path):
-        return __import__(path, fromlist=[''])
-
-    pattern_name = os.path.splitext(os.path.basename(path))[0]
-    return imp.load_source(pattern_name, path)
+    return __import__(maybe_path_to_module_name(path), fromlist=[''])
 
 
-# _module_re is not _strictly_ correct, but we do a quick check for strings
-# ending in .py before running the regex.
-_module_re = re.compile(r'^\w+(\.\w+)*$')
+def maybe_path_to_module_name(maybe_path):
+    relpath = os.path.relpath(maybe_path)
+    if relpath.startswith('..'):
+        raise ValueError("Relative imports not allowed: {}", relpath)
+    name = relpath.replace(os.sep, '.')
+    name_parts = name.split('.')
+    if name_parts[-1] == 'py':
+        name_parts = name_parts[:-1]
 
-
-def module_like(path):
-    if path.endswith('.py'):
-        return False
-
-    return bool(_module_re.match(path))
+    return '.'.join(name_parts)
 
 
 def create_find_and_replace(grammar, replace):
