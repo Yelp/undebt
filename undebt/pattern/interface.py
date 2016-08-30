@@ -33,28 +33,24 @@ def _fix_index(index):
 
 def get_patterns(*pattern_modules):
     """Returns patterns for pattern modules."""
-    pattern_list = []
-    for pattern in pattern_modules:
+    return [_get_patterns(p) for p in pattern_modules]
 
-        # new style pattern files
-        if hasattr(pattern, "patterns"):
-            patterns = pattern.patterns
 
-        # old style pattern files
-        elif hasattr(pattern, "grammar") and hasattr(pattern, "replace"):
-            patterns = [(pattern.grammar, pattern.replace)]
-            if hasattr(pattern, "extra"):
-                patterns.append(get_pattern_for_extra(pattern.extra))
+def _get_patterns(pattern):
+    if hasattr(pattern, "patterns"):
+        return pattern.patterns
 
-        else:
-            log.error(
-                'pattern file {} must define either ("patterns") or ("grammar" and "replace" and optionally "extra")'
-                .format(pattern.__name__)
-            )
-            sys.exit(1)
+    if hasattr(pattern, "grammar") and hasattr(pattern, "replace"):
+        patterns = [(pattern.grammar, pattern.replace)]
+        if hasattr(pattern, "extra"):
+            patterns.append(get_pattern_for_extra(pattern.extra))
+        return patterns
 
-        pattern_list.append(patterns)
-    return pattern_list
+    log.error(
+        'pattern file {} must define either ("patterns") or ("grammar" and "replace" and optionally "extra")'
+        .format(pattern.__name__)
+    )
+    sys.exit(1)
 
 
 def get_pattern_for_extra(extra):
