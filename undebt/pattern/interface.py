@@ -4,7 +4,6 @@ from __future__ import division
 from __future__ import print_function
 
 import imp
-import importlib
 import os
 import re
 import sys
@@ -77,20 +76,10 @@ def patterns_from_files(pattern_files):
 def load_module(path):
     """Loads a module from its path."""
     if module_like(path):
-        return _load_module(path)
+        return __import__(path, fromlist=[''])
 
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
-
-
-def _load_module(full_name):
-    try:
-        return importlib.import_module(full_name)
-    except ImportError as e:
-        raise e
-    finally:
-        # Unshim path
-        sys.path = sys.path[1:]
 
 
 # _module_re is not _strictly_ correct, but we do a quick check for strings
