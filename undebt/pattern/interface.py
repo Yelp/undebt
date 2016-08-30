@@ -80,7 +80,9 @@ def load_module(path):
 def maybe_path_to_module_name(maybe_path):
     relpath = os.path.relpath(maybe_path)
     if relpath.startswith('..'):
-        raise ValueError("Relative imports not allowed: {}", relpath)
+        raise ValueError(
+            "Relative file paths not allowed: {}".format(relpath),
+        )
     name = relpath.replace(os.sep, '.')
     name_parts = name.split('.')
     if name_parts[-1] == 'py':
