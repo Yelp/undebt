@@ -56,13 +56,9 @@ def test_single_file():
 
 
 def test_loading_pattern_with_module_name():
-    # Have to do some schenanigans here to get the module name to look like it
-    # came from the project root
-    module_name = 'undebt' + (
-        method_to_function_path[:-3]
-        .split('undebt')[-1]
-        .replace('/', '.')
-    )
+    # Need full module name here
+    import undebt.examples.method_to_function
+    module_name = undebt.examples.method_to_function.__name__
     args = ["undebt", "-p", module_name, method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
         main()
