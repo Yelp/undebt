@@ -76,9 +76,31 @@ def patterns_from_files(pattern_files):
 def load_module(path):
     """Loads a module from its path."""
     if module_like(path):
-        path = module_name_to_path(path)
+        return _load_module(path)
+
     pattern_name = os.path.splitext(os.path.basename(path))[0]
     return imp.load_source(pattern_name, path)
+
+
+def _load_module(full_name):
+    try:
+        sys.path = [os.getcwd()] + sys.path
+        (mod, path) = (None, None)
+        for name in full_name.split('.'):
+            # path=None defaults to sys.path (along with some other special
+            # places), which is why we shim it to include the cwd.
+            (f, p, d) = imp.find_module(name, path)
+            mod = imp.load_module(name, f, p, d)
+            # If `mod` is the final submodule, it will not have a __path__
+            # attribute.
+            path = getattr(mod, '__path__', None)
+
+        return mod
+    except ImportError as e:
+        raise e
+    finally:
+        # Unshim path
+        sys.path = sys.path[1:]
 
 
 # _module_re is not _strictly_ correct, but we do a quick check for strings
@@ -91,10 +113,6 @@ def module_like(path):
         return False
 
     return bool(_module_re.match(path))
-
-
-def module_name_to_path(module_name):
-    return module_name.replace('.', '/') + '.py'
 
 
 def create_find_and_replace(grammar, replace):

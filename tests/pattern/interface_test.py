@@ -4,11 +4,12 @@ from __future__ import division
 from __future__ import print_function
 
 import mock
+import pytest
 
 from undebt.examples import attribute_to_function
 from undebt.pattern.interface import get_patterns
+from undebt.pattern.interface import load_module
 from undebt.pattern.interface import module_like
-from undebt.pattern.interface import module_name_to_path
 from undebt.pattern.interface import _get_patterns
 from undebt.pattern.python import HEADER
 
@@ -56,7 +57,6 @@ def test_module_like():
     assert not module_like('bar.py')
 
 
-def test_module_name_to_path():
-    assert module_name_to_path('foo') == 'foo.py'
-    assert module_name_to_path('foo.bar') == 'foo/bar.py'
-    assert module_name_to_path('foo.bar.baz') == 'foo/bar/baz.py'
+def test_load_module_on_non_existant():
+    with pytest.raises(ImportError):
+        load_module('foo.bar.baz')
