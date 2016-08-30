@@ -3,10 +3,16 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
+from undebt.cmd.logic import _fix_pattern
 from undebt.cmd.logic import process
 from undebt.examples import attribute_to_function
 from undebt.examples import method_to_function
 from undebt.pattern.interface import get_patterns
+
+
+def test_fix_pattern_is_tuple():
+    pattern = ('fake_tuple_pattern',)
+    assert _fix_pattern(pattern) == [pattern]
 
 
 def test_no_match():
