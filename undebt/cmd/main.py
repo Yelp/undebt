@@ -4,7 +4,6 @@ from __future__ import division
 from __future__ import print_function
 
 import argparse
-import os
 import sys
 import traceback
 
@@ -106,14 +105,13 @@ class _file_processor(object):
 
 def main():
     """Handle and process arguments from sys.argv."""
-    logger.setup()
     args = _handle_arguments()
-    logger.setup(args.verbose)  # Reset logging level
 
+    logger.setup(args.verbose)
     processor = _file_processor(args.pattern, args.dry_run)
     files = args.files
 
-    if not files:  # Single process mode if stdin
+    if not files:
         log.info('running in stdin/stdout mode')
         processor(None)
         return
