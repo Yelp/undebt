@@ -55,6 +55,20 @@ def test_single_file():
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
+def test_loading_pattern_with_module_name():
+    # Have to do some schenanigans here to get the module name to look like it
+    # came from the project root
+    module_name = 'undebt' + (
+        method_to_function_path[:-3]
+        .split('undebt')[-1]
+        .replace('/', '.')
+    )
+    args = ["undebt", "-p", module_name, method_to_function_input_path, "--verbose"]
+    with mock.patch("sys.argv", args):
+        main()
+    assert _read_input_file() == method_to_function_output_contents == _read_output_file()
+
+
 def test_dry_run(capsys):
     args = ["undebt", "-p", method_to_function_path, "--dry-run", method_to_function_input_path, "--verbose"]
     with mock.patch("sys.argv", args):
