@@ -18,7 +18,7 @@ from undebt.pattern.common import DOT
 from undebt.pattern.common import IND_RPAREN
 from undebt.pattern.common import INDENT
 from undebt.pattern.common import LPAREN_IND
-from undebt.pattern.python import EXPR
+from undebt.pattern.lang.python import EXPR
 from undebt.pattern.util import tokens_as_dict
 
 

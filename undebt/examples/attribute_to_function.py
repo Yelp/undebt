@@ -10,7 +10,7 @@ from undebt.pattern.common import BRACKETS
 from undebt.pattern.common import DOT
 from undebt.pattern.common import NAME
 from undebt.pattern.common import PARENS
-from undebt.pattern.python import ATOM_BASE
+from undebt.pattern.lang.python import ATOM_BASE
 from undebt.pattern.util import condense
 from undebt.pattern.util import tokens_as_list
 

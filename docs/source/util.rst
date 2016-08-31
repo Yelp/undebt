@@ -125,8 +125,14 @@ Normally, whitespace between grammar elements is ignored when they are added tog
 **NL_WHITE**
 Same as `WHITE` but also matches new lines.
 
-`undebt.pattern.python`
------------------------
+`undebt.pattern.lang`
+---------------------
+
+Contains common patterns for a variety of languages. For example, for patterns
+specific to the Python grammar, use `undebt.pattern.lang.python`.
+
+`undebt.pattern.lang.python`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **EXPR**
 Matches any valid Python expression.

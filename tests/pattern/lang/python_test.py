@@ -3,13 +3,13 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from undebt.pattern.python import ATOM
-from undebt.pattern.python import BINARY_OP
-from undebt.pattern.python import EXPR
-from undebt.pattern.python import EXPR_IND_LIST
-from undebt.pattern.python import EXPR_LIST
-from undebt.pattern.python import HEADER
-from undebt.pattern.python import OP
+from undebt.pattern.lang.python import ATOM
+from undebt.pattern.lang.python import BINARY_OP
+from undebt.pattern.lang.python import EXPR
+from undebt.pattern.lang.python import EXPR_IND_LIST
+from undebt.pattern.lang.python import EXPR_LIST
+from undebt.pattern.lang.python import HEADER
+from undebt.pattern.lang.python import OP
 from undebt.pattern.testing import assert_parse
 
 

@@ -34,7 +34,7 @@ If `patterns` is defined, Undebt will ignore any definitions of `grammar`, `repl
 
 As an example, you can replicate the behavior of the basic style `extra` by doing the following::
 
-    from undebt.pattern.python import HEADER
+    from undebt.pattern.lang.python import HEADER
 
     @tokens_as_list(assert_len=1)
     def extra_replace(tokens):
