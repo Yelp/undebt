@@ -38,14 +38,8 @@ To run this pattern on your code:
 ```bash
 pip install undebt
 ```
-**(2)** Create a new file `my_class_inherit_object.py` containing
-```python
-from undebt.examples.class_inherit_object import grammar, replace
-```
-**(3)** Run `undebt` with `my_class_inherit_object.py` as the pattern
+**(2)** Run `undebt` with `class_inherit_object` as the pattern
 ```bash
-undebt --pattern ./my_class_inherit_object.py <directory or file to undebt> ...
+undebt --pattern undebt.examples.class_inherit_object <directory or file to undebt> ...
 ```
-If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html)._
-
-We also include some [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you can use undebt in conjunction with other common Unix utilities.
+If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html), which includes [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you how to use Undebt with other common Unix utilities._
