@@ -13,5 +13,6 @@ This is the documentation for Undebt_. See below for a list of all of the articl
    examples
    util
    pyparsing
+   contributing
 
 .. _Undebt: https://github.com/Yelp/undebt
