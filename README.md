@@ -42,4 +42,4 @@ pip install undebt
 ```bash
 undebt --pattern undebt.examples.class_inherit_object <directory or file to undebt> ...
 ```
-If you are undebting a directory, you will also need to pass `-e py` to tell `undebt` to search for Python files in that directory. _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html), which includes [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you how to use Undebt with other common Unix utilities._
+_For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html), which includes [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you how to use Undebt with other common Unix utilities._
