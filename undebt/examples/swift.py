@@ -9,7 +9,7 @@ from pyparsing import Literal
 from pyparsing import SkipTo
 
 from undebt.pattern.common import NAME
-from undebt.pattern.python import EXPR
+from undebt.pattern.lang.python import EXPR
 from undebt.pattern.util import condense
 from undebt.pattern.util import tokens_as_dict
 

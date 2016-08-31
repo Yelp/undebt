@@ -55,7 +55,7 @@ def _get_patterns(pattern):
 
 def get_pattern_for_extra(extra):
     """Returns a pattern object for an extra string."""
-    from undebt.pattern.python import HEADER
+    from undebt.pattern.lang.python import HEADER
 
     @tokens_as_list(assert_len=1)
     def extra_replace(tokens):

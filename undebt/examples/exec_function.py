@@ -8,7 +8,7 @@ from pyparsing import Optional
 
 from undebt.pattern.common import COMMA
 from undebt.pattern.common import INDENT
-from undebt.pattern.python import ATOM
+from undebt.pattern.lang.python import ATOM
 from undebt.pattern.util import tokens_as_list
 
 

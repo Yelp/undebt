@@ -11,7 +11,7 @@ from undebt.pattern.interface import get_patterns
 from undebt.pattern.interface import load_module
 from undebt.pattern.interface import maybe_path_to_module_name
 from undebt.pattern.interface import _get_patterns
-from undebt.pattern.python import HEADER
+from undebt.pattern.lang.python import HEADER
 
 
 def test_get_patterns_module_with_patterns():
