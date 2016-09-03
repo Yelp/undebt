@@ -19,28 +19,27 @@ Read it
 .. code-block:: bash
 
     $ undebt --help
-    usage: undebt [-h] --pattern PATH [--verbose] [--dry-run]
+    usage: undebt [-h] --pattern MODULE [--verbose] [--dry-run]
                   [FILE [FILE...]]
 
     positional arguments:
       FILE [FILE...]
-                            paths to files or directories (searched recursively
-                            for extension) to be modified (if not passed uses
+                            paths to files to be modified (if not passed uses
                             stdin)
 
     optional arguments:
-      -h, --help            show this help message and exit
-      --pattern PATH, -p PATH
-                            paths to pattern definition files or modules
+      -h, --help                  show this help message and exit
+      --pattern MODULE, -p MODULE
+                                  pattern definition modules
       --verbose, -v
-      --dry-run, -d         only print to stdout; do not overwrite files
+      --dry-run, -d               only print to stdout; do not overwrite files
 
 Try it out
 ----------
 
 .. code-block:: bash
 
-    $ undebt -p ./undebt/examples/method_to_function.py ./tests/inputs/method_to_function_input.txt
+    $ undebt -p undebt.examples.method_to_function ./tests/inputs/method_to_function_input.txt
     $ git diff
     diff --git a/tests/inputs/method_to_function_input.txt b/tests/inputs/method_to_function_input.txt
     index f268ab9..7681c63 100644
@@ -87,17 +86,17 @@ Using with ``grep``/``git grep`` to find files
 
 .. code-block:: bash
 
-    grep -l <search-text> **/*.css | xargs undebt -p <path-to-pattern>
+    grep -l <search-text> **/*.css | xargs undebt -p <pattern-module>
     
     # Use git grep if you only want to search tracked files
-    git grep -l <search-text> | xargs undebt -p <path-to-pattern>
+    git grep -l <search-text> | xargs undebt -p <pattern-module>
 
 Using ``find`` to limit to a particular extension
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: bash
 
-    find -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <path-to-pattern>
+    find -name '*.js' | xargs grep -l <search-text> | xargs undebt -p <pattern-module>
 
 Using ``xargs`` to work in parallel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,4 +106,4 @@ to use.
 
 .. code-block:: bash
 
-    git grep -l <search-text> | xargs -P <numprocs> undebt -p <path-to-pattern>
+    git grep -l <search-text> | xargs -P <numprocs> undebt -p <pattern-module>
