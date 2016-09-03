@@ -9,7 +9,6 @@ import pytest
 from undebt.examples import attribute_to_function
 from undebt.pattern.interface import get_patterns
 from undebt.pattern.interface import load_module
-from undebt.pattern.interface import maybe_path_to_module_name
 from undebt.pattern.interface import _get_patterns
 from undebt.pattern.lang.python import HEADER
 
@@ -48,15 +47,6 @@ def test_get_patterns():
     (grammar1, replace1) = pattern1
     (grammar2, replace2) = pattern2
     assert grammar2 is HEADER
-
-
-def test_maybe_path_to_module_name():
-    assert 'foo.bar' == maybe_path_to_module_name('foo.bar')
-    assert 'foo.bar' == maybe_path_to_module_name('foo/bar.py')
-    assert 'foo.bar' == maybe_path_to_module_name('foo/bar')
-
-    with pytest.raises(ValueError):
-        maybe_path_to_module_name('../relative/path.py')
 
 
 def test_load_module_on_non_existant():
