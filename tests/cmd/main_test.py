@@ -7,15 +7,12 @@ import os.path
 
 import mock
 
-import undebt.examples.method_to_function
 from undebt.cmd.main import _exit_fail_upon_error
 from undebt.cmd.main import _load_text
 from undebt.cmd.main import _process_file
 from undebt.cmd.main import _write_result_text
 from undebt.cmd.main import main
-
-
-method_to_function = undebt.examples.method_to_function
+from undebt.examples import method_to_function
 
 
 tests_inputs_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "inputs")
