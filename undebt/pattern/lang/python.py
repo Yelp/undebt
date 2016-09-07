@@ -69,6 +69,11 @@ EXPR_LIST = condense(EXPR + ZeroOrMore(addspace(COMMA + EXPR)) + Optional(COMMA)
 EXPR_IND_LIST = originalTextFor(EXPR + ZeroOrMore(COMMA_IND + EXPR) + Optional(COMMA_IND))
 
 
+KWARG = condense(NAME + Literal('=') + EXPR)
+KWARG_LIST = condense(KWARG + ZeroOrMore(addspace(COMMA + KWARG)) + Optional(COMMA))
+KWARG_IND_LIST = originalTextFor(KWARG + ZeroOrMore(COMMA_IND + KWARG) + Optional(COMMA_IND))
+
+
 HEADER = originalTextFor(START_OF_FILE + ZeroOrMore(SKIP_TO_TEXT + (
     STRING
     | pythonStyleComment
