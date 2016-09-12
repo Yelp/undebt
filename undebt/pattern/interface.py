@@ -3,8 +3,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import os
-import os.path
 import sys
 
 from pyparsing import _trim_arity
@@ -67,28 +65,14 @@ def get_pattern_for_extra(extra):
     return HEADER, extra_replace
 
 
-def patterns_from_files(pattern_files):
+def patterns_from_modules(pattern_modules):
     """Returns patterns for pattern files."""
-    return get_patterns(*(load_module(pattern_file) for pattern_file in pattern_files))
+    return get_patterns(*(load_module(pattern_module) for pattern_module in pattern_modules))
 
 
-def load_module(path):
-    """Loads a module from its path."""
-    return __import__(maybe_path_to_module_name(path), fromlist=[''])
-
-
-def maybe_path_to_module_name(maybe_path):
-    relpath = os.path.relpath(maybe_path)
-    if relpath.startswith('..'):
-        raise ValueError(
-            "Relative file paths not allowed: {}".format(relpath),
-        )
-    name = relpath.replace(os.sep, '.')
-    name_parts = name.split('.')
-    if name_parts[-1] == 'py':
-        name_parts = name_parts[:-1]
-
-    return '.'.join(name_parts)
+def load_module(module):
+    """Loads a module from its name."""
+    return __import__(module, fromlist=[''])
 
 
 def create_find_and_replace(grammar, replace):

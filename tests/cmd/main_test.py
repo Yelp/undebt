@@ -17,8 +17,6 @@ from undebt.examples import method_to_function
 
 tests_inputs_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "inputs")
 
-method_to_function_path = os.path.splitext(method_to_function.__file__)[0] + ".py"
-
 method_to_function_input_path = os.path.join(tests_inputs_directory, "method_to_function_input.txt")
 with open(method_to_function_input_path, "r") as f:
     method_to_function_input_contents = f.read()
@@ -109,31 +107,47 @@ def test_process_file_raises_exception(mock_process, mock_load_text):
 
 @mock.patch('undebt.cmd.main._file_processor')
 def test_no_file(mock_file_processor):
-    args = ['undebt', '-p', method_to_function_path]
+    args = ['undebt', '-p', method_to_function.__name__]
     with mock.patch('sys.argv', args):
         main()
     mock_file_processor().assert_called_once_with(None)
 
 
 def test_single_file():
-    args = ["undebt", "-p", method_to_function_path, method_to_function_input_path, "--verbose"]
+    args = [
+        "undebt",
+        "-p",
+        method_to_function.__name__,
+        method_to_function_input_path,
+        "--verbose",
+    ]
     with mock.patch("sys.argv", args):
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
 def test_loading_pattern_with_module_name():
-    # Need full module name here
-    import undebt.examples.method_to_function
-    module_name = undebt.examples.method_to_function.__name__
-    args = ["undebt", "-p", module_name, method_to_function_input_path, "--verbose"]
+    args = [
+        "undebt",
+        "-p",
+        method_to_function.__name__,
+        method_to_function_input_path,
+        "--verbose",
+    ]
     with mock.patch("sys.argv", args):
         main()
     assert _read_input_file() == method_to_function_output_contents == _read_output_file()
 
 
 def test_dry_run(capsys):
-    args = ["undebt", "-p", method_to_function_path, "--dry-run", method_to_function_input_path, "--verbose"]
+    args = [
+        "undebt",
+        "-p",
+        method_to_function.__name__,
+        "--dry-run",
+        method_to_function_input_path,
+        "--verbose",
+    ]
     with mock.patch("sys.argv", args):
         main()
     out, err = capsys.readouterr()

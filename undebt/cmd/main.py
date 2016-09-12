@@ -10,7 +10,7 @@ import traceback
 from undebt.cmd import logger
 from undebt.cmd.logger import log
 from undebt.cmd.logic import process
-from undebt.pattern.interface import patterns_from_files
+from undebt.pattern.interface import patterns_from_modules
 
 
 def _exit_fail_upon_error(func):
@@ -58,8 +58,8 @@ def _handle_arguments():
         help='files to be modified; uses stdin if not passed',
     )
     parser.add_argument(
-        '--pattern', '-p', metavar='PATH', action='append', required=True,
-        help='paths to pattern definition files or modules',
+        '--pattern', '-p', metavar='MODULE', action='append', required=True,
+        help='pattern definition modules',
     )
     parser.add_argument(
         '--verbose', '-v', action='store_true', default=False,
@@ -91,13 +91,13 @@ def _process_file(patterns, text_file, dry_run):
 class _file_processor(object):
     """Must be a class so it is pickleable."""
 
-    def __init__(self, pattern_files, dry_run):
-        self.pattern_files = pattern_files
+    def __init__(self, pattern_modules, dry_run):
+        self.pattern_modules = pattern_modules
         self.dry_run = dry_run
 
     @_exit_fail_upon_error
     def patterns(self):
-        return patterns_from_files(self.pattern_files)
+        return patterns_from_modules(self.pattern_modules)
 
     def __call__(self, text_file):
         return _process_file(self.patterns(), text_file, self.dry_run)
