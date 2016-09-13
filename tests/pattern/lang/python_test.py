@@ -9,6 +9,9 @@ from undebt.pattern.lang.python import EXPR
 from undebt.pattern.lang.python import EXPR_IND_LIST
 from undebt.pattern.lang.python import EXPR_LIST
 from undebt.pattern.lang.python import HEADER
+from undebt.pattern.lang.python import KWARG
+from undebt.pattern.lang.python import KWARG_IND_LIST
+from undebt.pattern.lang.python import KWARG_LIST
 from undebt.pattern.lang.python import OP
 from undebt.pattern.testing import assert_parse
 
@@ -107,6 +110,55 @@ def test_EXPR_IND_LIST():
         ],
         interval_list=[
             (9, 65),
+        ],
+    )
+
+
+def test_KWARG():
+    assert_parse(
+        grammar=KWARG,
+        text="""
+        foo=True
+        """,
+        tokens_list=[
+            ["foo=True"],
+        ],
+        interval_list=[
+            (9, 17),
+        ],
+    )
+
+
+def test_KWARG_LIST():
+    assert_parse(
+        grammar=KWARG_LIST,
+        text="""
+        foo=foo, bar=(a.b.c + 1), baz=False,
+        """,
+        tokens_list=[
+            ["foo=foo, bar=(a.b.c + 1), baz=False,"],
+        ],
+        interval_list=[
+            (9, 45),
+        ],
+    )
+
+
+def test_KWARG_IND_LIST():
+    assert_parse(
+        grammar=KWARG_IND_LIST,
+        text="""
+        foo=foo,
+        bar=(a.b.c + 1),
+        baz=False,
+        """,
+        tokens_list=[
+            ["""foo=foo,
+        bar=(a.b.c + 1),
+        baz=False,"""],
+        ],
+        interval_list=[
+            (9, 61),
         ],
     )
 
