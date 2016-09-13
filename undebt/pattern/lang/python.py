@@ -69,6 +69,10 @@ EXPR_LIST = condense(EXPR + ZeroOrMore(addspace(COMMA + EXPR)) + Optional(COMMA)
 EXPR_IND_LIST = originalTextFor(EXPR + ZeroOrMore(COMMA_IND + EXPR) + Optional(COMMA_IND))
 
 
+PARAM = condense(Optional(Word("*") | NAME + Literal("=")) + EXPR)
+PARAMS = originalTextFor(PARAM + ZeroOrMore(COMMA_IND + PARAM) + Optional(COMMA_IND))
+
+
 HEADER = originalTextFor(START_OF_FILE + ZeroOrMore(SKIP_TO_TEXT + (
     STRING
     | pythonStyleComment

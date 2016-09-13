@@ -25,7 +25,3 @@
         args:
         - --remove-import
         - from __future__ import with_statement
--   repo: https://github.com/Lucas-C/pre-commit-hooks.git
-    sha: a388fdbbf40b44089ca1bcb9a03f89e0ae4380b1
-    hooks:
-    -   id: remove-tabs

@@ -140,14 +140,14 @@ Matches any valid Python expression.
 **EXPR_LIST, EXPR_IND_LIST**
 Matches one or more `EXPR` separated by `COMMA` for `EXPR_LIST` or `COMMA_IND` for `EXPR_IND_LIST`.
 
+**PARAM, PARAMS**
+Matches one of (`PARAM`), or at least one of (`PARAMS`), the valid Python function parameters (`arg`, `kwarg=val`, `*args`, `**kwargs`).
+
 **ATOM**
 Matches a single valid Python atom (that is, an expression without operators).
 
-**TRAILER**
-Matches a valid Python trailer (attribute access, function call, indexing, etc.).
-
-**TRAILERS**
-Matches any number of `TRAILER`.
+**TRAILER, TRAILERS**
+Matches one of (`TRAILER`), or any number of (`TRAILERS`), the valid Python trailers (attribute access, function call, indexing, etc.).
 
 **ATOM_BASE**
 Matches an `ATOM` without any `TRAILERS` attached to it.

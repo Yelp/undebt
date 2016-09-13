@@ -10,7 +10,45 @@ from undebt.pattern.lang.python import EXPR_IND_LIST
 from undebt.pattern.lang.python import EXPR_LIST
 from undebt.pattern.lang.python import HEADER
 from undebt.pattern.lang.python import OP
+from undebt.pattern.lang.python import PARAM
+from undebt.pattern.lang.python import PARAMS
 from undebt.pattern.testing import assert_parse
+
+
+def test_PARAM():
+    assert_parse(
+        grammar=PARAM,
+        text="""
+        arga + argb, *args, kwarg=vala + valb, **kwargs
+        """,
+        tokens_list=[
+            ["arga + argb"],
+            ["*args"],
+            ["kwarg=vala + valb"],
+            ["**kwargs"],
+        ],
+        interval_list=[
+            (9, 20),
+            (22, 27),
+            (29, 46),
+            (48, 56),
+        ],
+    )
+
+
+def test_PARAMS():
+    assert_parse(
+        grammar=PARAMS,
+        text="""
+        arga + argb, *args, kwarg=vala + valb, **kwargs
+        """,
+        tokens_list=[
+            ["arga + argb, *args, kwarg=vala + valb, **kwargs"],
+        ],
+        interval_list=[
+            (9, 56),
+        ],
+    )
 
 
 def test_OP():
