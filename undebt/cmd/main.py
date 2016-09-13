@@ -8,8 +8,8 @@ import sys
 import traceback
 
 from undebt.cmd import logger
+from undebt.cmd import logic
 from undebt.cmd.logger import log
-from undebt.cmd.logic import process
 from undebt.pattern.interface import patterns_from_modules
 
 
@@ -72,13 +72,18 @@ def _handle_arguments():
     return parser.parse_args()
 
 
-def _process_file(patterns, text_file, dry_run):
+@_exit_fail_upon_error
+def load_patterns(pattern_files):
+    return patterns_from_modules(pattern_files)
+
+
+def process(patterns, text_file, dry_run):
     log.info('undebting {}'.format(text_file))
 
     text = _load_text(text_file)
 
     try:
-        result_text = process(patterns, text)
+        result_text = logic.process(patterns, text)
     except Exception:
         log.exception(traceback.format_exc())
         return False
@@ -88,34 +93,19 @@ def _process_file(patterns, text_file, dry_run):
         return True
 
 
-class _file_processor(object):
-    """Must be a class so it is pickleable."""
-
-    def __init__(self, pattern_modules, dry_run):
-        self.pattern_modules = pattern_modules
-        self.dry_run = dry_run
-
-    @_exit_fail_upon_error
-    def patterns(self):
-        return patterns_from_modules(self.pattern_modules)
-
-    def __call__(self, text_file):
-        return _process_file(self.patterns(), text_file, self.dry_run)
-
-
 def main():
     """Handle and process arguments from sys.argv."""
     args = _handle_arguments()
 
     logger.setup(args.verbose)
-    processor = _file_processor(args.pattern, args.dry_run)
+    patterns = load_patterns(args.pattern)
     files = args.files
 
     if not files:
         log.info('running in stdin/stdout mode')
-        processor(None)
+        process(patterns, None, args.dry_run)
         return
 
     log.info('running across {} file(s)'.format(len(files)))
     for f in files:
-        processor(f)
+        process(patterns, f, args.dry_run)

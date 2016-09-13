@@ -7,27 +7,42 @@ import os.path
 
 import mock
 
+from undebt.cmd import logic
+from undebt.cmd import main
 from undebt.cmd.main import _exit_fail_upon_error
 from undebt.cmd.main import _load_text
-from undebt.cmd.main import _process_file
 from undebt.cmd.main import _write_result_text
-from undebt.cmd.main import main
 from undebt.examples import method_to_function
 
 
-tests_inputs_directory = os.path.join(os.path.dirname(os.path.dirname(__file__)), "inputs")
+tests_inputs_directory = os.path.join(
+    os.path.dirname(os.path.dirname(__file__)),
+    "inputs",
+)
 
-method_to_function_input_path = os.path.join(tests_inputs_directory, "method_to_function_input.txt")
+method_to_function_path = os.path.splitext(
+    method_to_function.__file__
+)[0] + ".py"
+
+method_to_function_input_path = os.path.join(
+    tests_inputs_directory,
+    "method_to_function_input.txt",
+)
 with open(method_to_function_input_path, "r") as f:
     method_to_function_input_contents = f.read()
 
-method_to_function_output_path = os.path.join(tests_inputs_directory, "method_to_function_output.txt")
+method_to_function_output_path = os.path.join(
+    tests_inputs_directory,
+    "method_to_function_output.txt",
+)
 with open(method_to_function_output_path, "r") as f:
     method_to_function_output_contents = f.read()
 
 
 def test_input_output_different():
-    assert method_to_function_input_contents != method_to_function_output_contents
+    assert (
+        method_to_function_input_contents != method_to_function_output_contents
+    )
 
 
 def _read_input_file():
@@ -78,13 +93,13 @@ def test_write_text_file_dry_run_with_path(mock_stdout):
 
 
 @mock.patch('undebt.cmd.main._load_text')
-@mock.patch('undebt.cmd.main.process')
+@mock.patch('undebt.cmd.logic.process')
 def test_process_file_with_exception(mock_process, mock_load_text):
     fake_patterns = mock.MagicMock()
     fake_text_file = mock.Mock()
     mock_process.side_effect = Exception('fake exception')
 
-    assert _process_file(
+    assert main.process(
         patterns=fake_patterns,
         text_file=fake_text_file,
         dry_run=False,
@@ -92,25 +107,29 @@ def test_process_file_with_exception(mock_process, mock_load_text):
 
 
 @mock.patch('undebt.cmd.main._load_text')
-@mock.patch('undebt.cmd.main.process')
+@mock.patch('undebt.cmd.logic.process')
 def test_process_file_raises_exception(mock_process, mock_load_text):
     fake_patterns = mock.MagicMock()
     fake_text_file = mock.Mock()
-    mock_load_text.return_value = mock_process.return_value = 'text does not change after process'
+    mock_load_text.return_value = 'text does not change after process'
+    mock_process.return_value = 'text does not change after process'
 
-    assert _process_file(
+    assert main.process(
         patterns=fake_patterns,
         text_file=fake_text_file,
         dry_run=False,
     ) is True
 
 
-@mock.patch('undebt.cmd.main._file_processor')
-def test_no_file(mock_file_processor):
-    args = ['undebt', '-p', method_to_function.__name__]
+@mock.patch('undebt.cmd.main.load_patterns')
+@mock.patch('undebt.cmd.main.process')
+def test_no_file(mock_process, mock_load_patterns):
+    fake_patterns = mock.MagicMock()
+    mock_load_patterns.return_value = fake_patterns
+    args = ['undebt', '-p', 'blah']
     with mock.patch('sys.argv', args):
-        main()
-    mock_file_processor().assert_called_once_with(None)
+        main.main()
+    mock_process.assert_called_once_with(fake_patterns, None, False)
 
 
 def test_single_file():
@@ -122,8 +141,12 @@ def test_single_file():
         "--verbose",
     ]
     with mock.patch("sys.argv", args):
-        main()
-    assert _read_input_file() == method_to_function_output_contents == _read_output_file()
+        main.main()
+    assert (
+        _read_input_file() ==
+        method_to_function_output_contents ==
+        _read_output_file()
+    )
 
 
 def test_loading_pattern_with_module_name():
@@ -135,8 +158,12 @@ def test_loading_pattern_with_module_name():
         "--verbose",
     ]
     with mock.patch("sys.argv", args):
-        main()
-    assert _read_input_file() == method_to_function_output_contents == _read_output_file()
+        main.main()
+    assert (
+        _read_input_file() ==
+        method_to_function_output_contents ==
+        _read_output_file()
+    )
 
 
 def test_dry_run(capsys):
@@ -149,7 +176,7 @@ def test_dry_run(capsys):
         "--verbose",
     ]
     with mock.patch("sys.argv", args):
-        main()
+        main.main()
     out, err = capsys.readouterr()
     assert err == '>>> {}\n'.format(method_to_function_input_path)
     assert out == method_to_function_output_contents
