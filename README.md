@@ -40,6 +40,6 @@ pip install undebt
 ```
 **(2)** Run `undebt` with `class_inherit_object` as the pattern
 ```bash
-undebt --pattern undebt.examples.class_inherit_object <directory or file to undebt> ...
+undebt --pattern undebt.examples.class_inherit_object <file to undebt> ...
 ```
 _For a complete command line example and the full command line help, see the [command line documentation](http://undebt.readthedocs.io/en/latest/cli.html), which includes [tips and tricks](http://undebt.readthedocs.io/en/latest/cli.html#tips-and-tricks) to show how you how to use Undebt with other common Unix utilities._
