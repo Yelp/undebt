@@ -57,7 +57,7 @@ Modifies a grammar element to parse to the result of calling `action` on the  to
 -----------------------
 
 **INDENT**
-Matches any amount of indentation at the start of a line.
+Matches any amount of indentation, including all non-text.
 
 **PARENS, BRACKETS, BRACES**
 Grammar elements that match an open parenthesis / bracket / brace to the corresponding closing parenthesis / bracket / brace.
