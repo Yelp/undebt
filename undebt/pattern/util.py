@@ -4,6 +4,7 @@ from __future__ import division
 from __future__ import print_function
 
 import functools
+import operator
 
 from pyparsing import _trim_arity
 from pyparsing import col
@@ -107,3 +108,11 @@ def tokens_as_dict(assert_keys=None, assert_keys_in=None):
             return _trim_arity(old_replace)(s, l, tokendict)
         return new_replace
     return decorator
+
+
+def sequence(grammar, n):
+    """
+    Creates a grammar element that matches exactly N of the input
+    grammar.
+    """
+    return functools.reduce(operator.add, [grammar] * n)
