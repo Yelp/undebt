@@ -53,6 +53,10 @@ Modifies a grammar element to print the tokens that it matches.
 
 Modifies a grammar element to parse to the result of calling `action` on the  tokens produced by that grammar element.
 
+**sequence(grammar, n)**
+
+Creates a grammar element that matches exactly `n` of the input grammar.
+
 `undebt.pattern.common`
 -----------------------
 

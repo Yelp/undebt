@@ -7,12 +7,14 @@ import sys
 
 import mock
 from pyparsing import Keyword
+from pyparsing import Literal
 
 from undebt.pattern.testing import assert_parse
 from undebt.pattern.util import debug
 from undebt.pattern.util import in_string
 from undebt.pattern.util import leading_whitespace
 from undebt.pattern.util import quoted
+from undebt.pattern.util import sequence
 from undebt.pattern.util import trailing_whitespace
 
 
@@ -73,3 +75,14 @@ def test_in_string():
     assert in_string(7, test)
     assert in_string(8, test)
     assert not in_string(9, test)
+
+
+def test_sequence():
+    a = Literal('a')
+    double_a = sequence(a, n=2)
+    triple_a = sequence(a, n=3)
+
+    assert double_a.matches('aa')
+    assert triple_a.matches('aaa')
+    assert not double_a.matches('aaa')
+    assert not triple_a.matches('aa')
