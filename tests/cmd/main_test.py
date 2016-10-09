@@ -126,22 +126,19 @@ def test_process_file_raises_exception(mock_process, mock_load_text):
 def test_no_file(mock_process, mock_load_patterns):
     fake_patterns = mock.MagicMock()
     mock_load_patterns.return_value = fake_patterns
-    args = ['undebt', '-p', 'blah']
-    with mock.patch('sys.argv', args):
-        main.main()
+    args = ['-p', 'blah']
+    main.main(args)
     mock_process.assert_called_once_with(fake_patterns, None, False)
 
 
 def test_single_file():
     args = [
-        "undebt",
         "-p",
         method_to_function.__name__,
         method_to_function_input_path,
         "--verbose",
     ]
-    with mock.patch("sys.argv", args):
-        main.main()
+    main.main(args)
     assert (
         _read_input_file() ==
         method_to_function_output_contents ==
@@ -151,14 +148,12 @@ def test_single_file():
 
 def test_loading_pattern_with_module_name():
     args = [
-        "undebt",
         "-p",
         method_to_function.__name__,
         method_to_function_input_path,
         "--verbose",
     ]
-    with mock.patch("sys.argv", args):
-        main.main()
+    main.main(args)
     assert (
         _read_input_file() ==
         method_to_function_output_contents ==
@@ -168,15 +163,13 @@ def test_loading_pattern_with_module_name():
 
 def test_dry_run(capsys):
     args = [
-        "undebt",
         "-p",
         method_to_function.__name__,
         "--dry-run",
         method_to_function_input_path,
         "--verbose",
     ]
-    with mock.patch("sys.argv", args):
-        main.main()
+    main.main(args)
     out, err = capsys.readouterr()
     assert err == '>>> {}\n'.format(method_to_function_input_path)
     assert out == method_to_function_output_contents
