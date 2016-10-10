@@ -93,10 +93,8 @@ def process(patterns, text_file, dry_run):
         return True
 
 
-def main(args=None):
+def main(args=sys.argv[1:]):
     """Handle and process arguments from args."""
-    if args is None:
-        args = sys.argv[1:]
     args = _handle_arguments(args)
 
     logger.setup(args.verbose)
