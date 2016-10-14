@@ -51,7 +51,7 @@ def _write_result_text(result_text, path, dry_run):
 
 
 @_exit_fail_upon_error
-def _handle_arguments():
+def _handle_arguments(args):
     parser = argparse.ArgumentParser(prog='undebt')
     parser.add_argument(
         'files', nargs='*', metavar='FILE',
@@ -69,7 +69,7 @@ def _handle_arguments():
         '--dry-run', '-d', action='store_true', default=False,
         help='only print to stdout; do not overwrite files',
     )
-    return parser.parse_args()
+    return parser.parse_args(args)
 
 
 @_exit_fail_upon_error
@@ -93,9 +93,9 @@ def process(patterns, text_file, dry_run):
         return True
 
 
-def main():
-    """Handle and process arguments from sys.argv."""
-    args = _handle_arguments()
+def main(args=sys.argv[1:]):
+    """Handle and process arguments from args."""
+    args = _handle_arguments(args)
 
     logger.setup(args.verbose)
     patterns = load_patterns(args.pattern)
