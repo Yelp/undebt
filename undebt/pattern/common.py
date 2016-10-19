@@ -24,7 +24,7 @@ from undebt.pattern.util import condense
 from undebt.pattern.util import fixto
 
 
-ANY_CHAR = Regex(r".", re.DOTALL)
+ANY_CHAR = Regex(r".", re.DOTALL | re.U)
 
 
 START_OF_FILE = StringStart().suppress()
