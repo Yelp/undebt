@@ -20,5 +20,4 @@ def replace(tokens):
     shift = flag.bit_length() - 1
     if shift >= 0 and 1 << shift == flag:
         return "1 << " + str(shift)
-    else:
-        return None
+    return None
