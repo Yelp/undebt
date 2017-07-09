@@ -6,8 +6,6 @@ from __future__ import print_function
 import sys
 
 import mock
-from pyparsing import Keyword
-from pyparsing import Literal
 
 from undebt.pattern.testing import assert_parse
 from undebt.pattern.util import debug
@@ -16,6 +14,8 @@ from undebt.pattern.util import leading_whitespace
 from undebt.pattern.util import quoted
 from undebt.pattern.util import sequence
 from undebt.pattern.util import trailing_whitespace
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Literal
 
 
 if sys.version_info.major == 3:

@@ -3,15 +3,14 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import delimitedList
-from pyparsing import Keyword
-from pyparsing import Literal
-from pyparsing import SkipTo
-
 from undebt.pattern.common import NAME
 from undebt.pattern.lang.python import EXPR
 from undebt.pattern.util import condense
 from undebt.pattern.util import tokens_as_dict
+from undebt.pyparsing import delimitedList
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Literal
+from undebt.pyparsing import SkipTo
 
 
 if_ = Keyword("if")

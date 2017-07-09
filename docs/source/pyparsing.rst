@@ -13,6 +13,10 @@ While the `official pyparsing documentation`_ is a great resource, most of the m
 
 .. _`official pyparsing documentation`: https://pythonhosted.org/pyparsing/
 
+The recommended way to import `pyparsing` is via `undebt.pyparsing`. This has the advantage that if the faster `cPyparsing`_ is available, `undebt.pyparsing` will use it instead. To install `cPyparsing`_ automatically with your `undebt` installation, just `pip install undebt[cPyparsing]`.
+
+.. _`cPyparsing`: https://github.com/evhub/cpyparsing
+
 Operators
 ---------
 

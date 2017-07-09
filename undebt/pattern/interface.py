@@ -5,11 +5,10 @@ from __future__ import print_function
 
 import sys
 
-from pyparsing import _trim_arity
-
 from undebt.cmd.logger import log
 from undebt.pattern.util import attach
 from undebt.pattern.util import tokens_as_list
+from undebt.pyparsing import _trim_arity
 
 
 # required at the beginning of a string to be able to properly parse it

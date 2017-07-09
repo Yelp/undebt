@@ -5,23 +5,22 @@ from __future__ import print_function
 
 import re
 
-from pyparsing import CharsNotIn
-from pyparsing import Literal
-from pyparsing import nestedExpr
-from pyparsing import Optional
-from pyparsing import originalTextFor
-from pyparsing import quotedString
-from pyparsing import Regex
-from pyparsing import SkipTo
-from pyparsing import StringEnd
-from pyparsing import StringStart
-from pyparsing import Word
-from pyparsing import ZeroOrMore
-
 from undebt.pattern import WHITESPACE_CHARS
 from undebt.pattern import WHITESPACE_OR_NL_CHARS
 from undebt.pattern.util import condense
 from undebt.pattern.util import fixto
+from undebt.pyparsing import CharsNotIn
+from undebt.pyparsing import Literal
+from undebt.pyparsing import nestedExpr
+from undebt.pyparsing import Optional
+from undebt.pyparsing import originalTextFor
+from undebt.pyparsing import quotedString
+from undebt.pyparsing import Regex
+from undebt.pyparsing import SkipTo
+from undebt.pyparsing import StringEnd
+from undebt.pyparsing import StringStart
+from undebt.pyparsing import Word
+from undebt.pyparsing import ZeroOrMore
 
 
 ANY_CHAR = Regex(r".", re.DOTALL | re.U)

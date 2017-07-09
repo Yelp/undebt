@@ -3,9 +3,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Keyword
-from pyparsing import Literal
-
 from undebt.pattern.common import DOT
 from undebt.pattern.common import LPAREN
 from undebt.pattern.common import PARENS
@@ -13,6 +10,8 @@ from undebt.pattern.common import RPAREN
 from undebt.pattern.util import leading_whitespace
 from undebt.pattern.util import tokens_as_dict
 from undebt.pattern.util import trailing_whitespace
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Literal
 
 
 grammar = (

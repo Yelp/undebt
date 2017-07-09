@@ -3,9 +3,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Keyword
-from pyparsing import ZeroOrMore
-
 from undebt.pattern.common import BRACKETS
 from undebt.pattern.common import DOT
 from undebt.pattern.common import NAME
@@ -13,6 +10,8 @@ from undebt.pattern.common import PARENS
 from undebt.pattern.lang.python import ATOM_BASE
 from undebt.pattern.util import condense
 from undebt.pattern.util import tokens_as_list
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import ZeroOrMore
 
 
 attribute = Keyword("attribute")

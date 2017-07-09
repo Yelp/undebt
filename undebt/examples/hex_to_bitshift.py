@@ -3,12 +3,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Combine
-from pyparsing import hexnums
-from pyparsing import Literal
-from pyparsing import Word
-
 from undebt.pattern.util import tokens_as_list
+from undebt.pyparsing import Combine
+from undebt.pyparsing import hexnums
+from undebt.pyparsing import Literal
+from undebt.pyparsing import Word
 
 grammar = Combine(Literal("0x").suppress() + Word(hexnums))
 

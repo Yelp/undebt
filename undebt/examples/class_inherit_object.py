@@ -3,15 +3,14 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Keyword
-from pyparsing import Optional
-
 from undebt.pattern.common import COLON
 from undebt.pattern.common import INDENT
 from undebt.pattern.common import LPAREN
 from undebt.pattern.common import NAME
 from undebt.pattern.common import RPAREN
 from undebt.pattern.util import tokens_as_list
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Optional
 
 
 grammar = INDENT + Keyword("class").suppress() + NAME + (Optional(LPAREN + RPAREN) + COLON).suppress()

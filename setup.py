@@ -17,8 +17,8 @@ setup(
     license="Copyright Yelp, Inc. 2016",
     url="https://github.com/Yelp/undebt",
     packages=find_packages(exclude=[
-        "tests*",
-        "docs*",
+        "tests",
+        "docs",
     ]),
     install_requires=[
         'pyparsing',
@@ -29,6 +29,9 @@ setup(
             "pytest",
             "mock",
             "coverage",
+        ],
+        "cPyparsing": [
+            "cPyparsing",
         ],
     },
     entry_points={
