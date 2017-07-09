@@ -3,17 +3,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Combine
-from pyparsing import Keyword
-from pyparsing import Literal
-from pyparsing import OneOrMore
-from pyparsing import Optional
-from pyparsing import originalTextFor
-from pyparsing import pythonStyleComment
-from pyparsing import SkipTo
-from pyparsing import Word
-from pyparsing import ZeroOrMore
-
 from undebt.pattern.common import BRACES
 from undebt.pattern.common import BRACKETS
 from undebt.pattern.common import COMMA
@@ -29,6 +18,16 @@ from undebt.pattern.common import START_OF_FILE
 from undebt.pattern.common import STRING
 from undebt.pattern.util import addspace
 from undebt.pattern.util import condense
+from undebt.pyparsing import Combine
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Literal
+from undebt.pyparsing import OneOrMore
+from undebt.pyparsing import Optional
+from undebt.pyparsing import originalTextFor
+from undebt.pyparsing import pythonStyleComment
+from undebt.pyparsing import SkipTo
+from undebt.pyparsing import Word
+from undebt.pyparsing import ZeroOrMore
 
 
 ASSIGN_OP = Combine((Word("~%^&*-+|/") | ~Literal("==")) + Literal("="))

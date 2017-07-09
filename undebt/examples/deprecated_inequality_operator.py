@@ -3,10 +3,9 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Literal
-
 from undebt.pattern.lang.python import UNARY_OP_ATOM
 from undebt.pattern.util import tokens_as_list
+from undebt.pyparsing import Literal
 
 
 grammar = UNARY_OP_ATOM + Literal("<>").suppress() + UNARY_OP_ATOM

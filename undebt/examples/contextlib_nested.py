@@ -8,10 +8,6 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from pyparsing import Keyword
-from pyparsing import Optional
-from pyparsing import ZeroOrMore
-
 from undebt.pattern.common import COLON
 from undebt.pattern.common import COMMA_IND
 from undebt.pattern.common import DOT
@@ -20,6 +16,9 @@ from undebt.pattern.common import INDENT
 from undebt.pattern.common import LPAREN_IND
 from undebt.pattern.lang.python import EXPR
 from undebt.pattern.util import tokens_as_dict
+from undebt.pyparsing import Keyword
+from undebt.pyparsing import Optional
+from undebt.pyparsing import ZeroOrMore
 
 
 expr_list = (

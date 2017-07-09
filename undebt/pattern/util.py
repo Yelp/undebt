@@ -6,14 +6,13 @@ from __future__ import print_function
 import functools
 import operator
 
-from pyparsing import _trim_arity
-from pyparsing import col
-from pyparsing import Combine
-from pyparsing import line
-from pyparsing import originalTextFor
-from pyparsing import replaceWith
-
 from undebt.pattern import WHITESPACE_OR_NL_CHARS
+from undebt.pyparsing import _trim_arity
+from undebt.pyparsing import col
+from undebt.pyparsing import Combine
+from undebt.pyparsing import line
+from undebt.pyparsing import originalTextFor
+from undebt.pyparsing import replaceWith
 
 
 def attach(item, action):
